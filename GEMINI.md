@@ -1,6 +1,6 @@
-# 🎯 Antigravity Desktop Project Guidelines
+# 🎯 Paylabs VA Desktop Project Guidelines
 
-Pedoman dan standar pengembangan untuk aplikasi desktop **Antigravity Desktop** berbasis **Tauri v2 + React TypeScript**.
+Pedoman dan standar pengembangan untuk aplikasi desktop **Paylabs VA Desktop** berbasis **Tauri v2 + React TypeScript**.
 
 ---
 
@@ -15,7 +15,7 @@ Pedoman dan standar pengembangan untuk aplikasi desktop **Antigravity Desktop** 
 
 ## 📐 Standar Desain & UX Lintas Platform (Windows & macOS)
 
-Semua pengembangan fitur visual wajib mengikuti aturan di [`.agents/rules/tauri-styling.md`](file:///c:/project/antigravity/.agents/rules/tauri-styling.md):
+Semua pengembangan fitur visual wajib mengikuti aturan di [`.agents/rules/tauri-styling.md`](file:///c:/project/PaylabsVA-Desktop-main/.agents/rules/tauri-styling.md):
 
 1. **Kanvas & Frame**:
    - `decorations: false`, `transparent: true`, `shadow: false` di `tauri.conf.json`.
@@ -49,4 +49,4 @@ Semua pengembangan fitur visual wajib mengikuti aturan di [`.agents/rules/tauri-
 
 ## 📚 Skill Terkait
 
-Gunakan skill [`.agents/skills/tauri-desktop-style/SKILL.md`](file:///c:/project/antigravity/.agents/skills/tauri-desktop-style/SKILL.md) untuk panduan teknis langkah demi langkah penambahan IPC command, window management, integrasi MCP server, dan validasi QA.
+Gunakan skill [`.agents/skills/tauri-desktop-style/SKILL.md`](file:///c:/project/PaylabsVA-Desktop-main/.agents/skills/tauri-desktop-style/SKILL.md) untuk panduan teknis langkah demi langkah penambahan IPC command, window management, integrasi MCP server, dan validasi QA.

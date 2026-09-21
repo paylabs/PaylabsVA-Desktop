@@ -1,4 +1,4 @@
-# 🚀 Antigravity Desktop — Paylabs SNAP Virtual Account (Tauri v2 + React)
+# 🚀 Paylabs VA Desktop — SNAP Virtual Account (Tauri v2 + React)
 
 Aplikasi desktop native modern untuk integrasi dan pengujian **Paylabs SNAP Virtual Account (VA)** berbasis **Tauri v2 (Rust)** dan **React 19 + TypeScript + Vite**. Dirancang dengan arsitektur aman dan filosofi desain **Platform-Harmonized Desktop UX** (Windows & macOS).
 
@@ -25,7 +25,7 @@ Aplikasi desktop native modern untuk integrasi dan pengujian **Paylabs SNAP Virt
 ## 📁 Struktur Direktori
 
 ```
-antigravity/
+paylabs-va-desktop/
 ├── src-tauri/                     # Backend Rust & Engine Tauri v2
 │   ├── src/
 │   │   ├── commands/              # Modul IPC Commands

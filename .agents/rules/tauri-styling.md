@@ -91,7 +91,7 @@ Pedoman dan aturan baku pengembangan aplikasi desktop berbasis **Tauri v2 (Rust 
    - Wajib diposisikan di **kanan atas (*top-right*)** layar (`top: 48px; right: 16px;`), melayang tepat di bawah titlebar (bukan di pojok kanan bawah gaya Windows).
    - Kapsul melengkung `border-radius: 14px;` dengan efek kaca berembun (`backdrop-filter: saturate(190%) blur(24px);`).
    - Squircle icon badge aplikasi (`32x32px`, `border-radius: 8px`) dengan warna sistem Apple (`success`, `info`, `warning`, `error`).
-   - Tombol dismiss mikro bulat (20px, `border-radius: 50%`) dan header identitas aplikasi (`Antigravity • sekarang`).
+   - Tombol dismiss mikro bulat (20px, `border-radius: 50%`) dan header identitas aplikasi (`Paylabs SNAP • sekarang`).
 
 ---
 

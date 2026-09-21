@@ -26,7 +26,7 @@ export const IosGroupedDemo: React.FC = () => {
             </div>
             <div>
               <div className="ios-row-title">Koneksi Jaringan Lokal</div>
-              <div className="ios-row-subtitle">Terhubung ke Antigravity Safe IPC</div>
+              <div className="ios-row-subtitle">Terhubung ke Paylabs Safe IPC</div>
             </div>
           </div>
           <IosSwitch checked={wifiActive} onChange={setWifiActive} aria-label="Toggle Wifi" />

@@ -1,6 +1,6 @@
 # 🍎 macOS Native Guidelines & Standards
 
-Pedoman baku perancangan dan implementasi antarmuka macOS native untuk proyek **Antigravity Desktop** berbasis Tauri v2 + React.
+Pedoman baku perancangan dan implementasi antarmuka macOS native untuk proyek **Paylabs VA Desktop** berbasis Tauri v2 + React.
 
 ---
 
