@@ -1,0 +1,414 @@
+/**
+ * @file titlebar.css
+ * @description Styling layout titlebar adaptif, tombol kontrol window, dan drag region dengan native macOS & Windows hover.
+ */
+
+.adaptive-titlebar {
+  height: var(--titlebar-height);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-surface-1);
+  border-bottom: 1px solid var(--border-subtle);
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+  z-index: 100;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  -webkit-app-region: drag;
+  outline: none !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* Area yang bisa di-drag untuk memindahkan window Tauri */
+.titlebar-drag-region {
+  flex: 1;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  -webkit-app-region: drag;
+}
+
+/* Nonaktifkan pointer-events pada teks agar tidak mencegat mousedown drag */
+.titlebar-drag-region * {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Judul Window Tepat di Tengah Geometris (Apple HIG & Fluent Absolute Centering) */
+.titlebar-center-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: calc(100% - 300px);
+  pointer-events: none;
+  user-select: none;
+  z-index: 10;
+  text-align: center;
+  -webkit-app-region: drag;
+}
+
+.titlebar-center-title * {
+  pointer-events: none;
+  user-select: none;
+}
+
+.desktop-window-container.ios .titlebar-center-title {
+  max-width: calc(100% - 210px);
+}
+
+/* Non-drag item di dalam titlebar (tombol, input, dropdown) */
+.no-drag {
+  -webkit-app-region: no-drag;
+  pointer-events: auto;
+  outline: none !important;
+}
+
+/* Tombol Search Spotlight di Titlebar */
+.titlebar-search-btn {
+  height: var(--titlebar-btn-height, 26px);
+  padding: 0 8px;
+  gap: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-button, 8px);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 11.5px;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  outline: none !important;
+  user-select: none;
+}
+
+.titlebar-search-btn:hover {
+  background-color: var(--bg-surface-hover);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+.titlebar-search-btn:active {
+  transform: scale(0.97);
+}
+
+.titlebar-search-btn:focus,
+.titlebar-search-btn:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: var(--border-subtle) !important;
+}
+
+/* Tombol Toggle Tema */
+.titlebar-theme-toggle {
+  height: var(--titlebar-btn-height, 26px);
+  width: var(--titlebar-btn-height, 26px);
+  padding: 0;
+  box-sizing: border-box;
+  background: transparent;
+  border: 1px solid transparent;
+  outline: none !important;
+  color: var(--text-secondary);
+  border-radius: var(--radius-button, 8px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 2px;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.titlebar-theme-toggle:hover {
+  background-color: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.titlebar-theme-toggle:active {
+  transform: scale(0.94);
+}
+
+.titlebar-theme-toggle:focus {
+  outline: none !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+}
+
+/* Tombol Switch Preview macOS / Windows */
+.titlebar-preview-btn {
+  height: var(--titlebar-btn-height, 26px);
+  padding: 0 10px;
+  box-sizing: border-box;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  outline: none !important;
+  color: var(--text-secondary);
+  border-radius: var(--radius-button, 8px);
+  font-size: 11px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.titlebar-preview-btn:hover {
+  background-color: var(--bg-surface-hover);
+  color: var(--text-primary);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.titlebar-preview-btn:active {
+  transform: scale(0.96);
+}
+
+.titlebar-preview-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Tombol Kredensial Paylabs di Navbar Atas (macOS Toolbar Pill) */
+.titlebar-credential-pill {
+  height: var(--titlebar-btn-height, 26px);
+  padding: 0 10px;
+  box-sizing: border-box;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  outline: none !important;
+  color: var(--text-primary);
+  border-radius: var(--radius-button, 8px);
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-right: 12px;
+  transition: all 0.15s ease;
+}
+
+.titlebar-credential-pill .status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.titlebar-credential-pill .status-dot.sit {
+  background: #6366f1;
+  box-shadow: 0 0 6px rgba(99, 102, 241, 0.6);
+}
+
+.titlebar-credential-pill .status-dot.prod {
+  background: #ef4444;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.7);
+}
+
+.titlebar-credential-pill.is-prod {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+}
+
+.titlebar-credential-pill.is-sit {
+  background: rgba(99, 102, 241, 0.08);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: var(--text-primary);
+}
+
+.titlebar-credential-pill:hover {
+  background: var(--bg-surface-hover);
+  border-color: var(--accent-primary);
+  transform: translateY(-0.5px);
+}
+
+.titlebar-credential-pill:active {
+  transform: scale(0.96);
+}
+
+/* -------------------------------------------------------------
+ * macOS Traffic Lights (Native Apple HIG Micro-Interactions)
+ * ------------------------------------------------------------- */
+.mac-traffic-lights-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  height: 100%;
+  -webkit-app-region: no-drag;
+}
+
+.mac-traffic-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--mac-stroke);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  outline: none !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease;
+  -webkit-app-region: no-drag;
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.mac-traffic-light.close {
+  background-color: var(--mac-close);
+}
+
+.mac-traffic-light.minimize {
+  background-color: var(--mac-minimize);
+}
+
+.mac-traffic-light.maximize {
+  background-color: var(--mac-maximize);
+}
+
+/* Ikon mikro SVG di dalam traffic light */
+.mac-traffic-light svg {
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  pointer-events: none;
+}
+
+/* Saat kursor masuk ke area traffic lights: semua ikon mikro muncul serentak khas macOS */
+.mac-traffic-lights-container:hover .mac-traffic-light svg {
+  opacity: 0.75;
+}
+
+/* Hover spesifik per tombol: warna sedikit lebih dalam dan simbol 100% tegas */
+.mac-traffic-light.close:hover {
+  background-color: #e0443e;
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.mac-traffic-light.minimize:hover {
+  background-color: #dea123;
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.mac-traffic-light.maximize:hover {
+  background-color: #1aab29;
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.mac-traffic-light:hover svg {
+  opacity: 1 !important;
+}
+
+/* Active click state: tombol sedikit tertekan (spring feedback) */
+.mac-traffic-light:active {
+  transform: scale(0.90) !important;
+  filter: brightness(0.92);
+}
+
+/* -------------------------------------------------------------
+ * Windows Window Controls
+ * ------------------------------------------------------------- */
+.win-controls-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  -webkit-app-region: no-drag;
+}
+
+.win-control-btn {
+  width: 46px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none !important;
+  outline: none !important;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease;
+  -webkit-app-region: no-drag;
+}
+
+.win-control-btn:hover {
+  background-color: var(--win-btn-hover);
+  color: var(--text-primary);
+}
+
+.win-control-btn:active {
+  background-color: var(--win-btn-active);
+}
+
+.win-control-btn.close:hover {
+  background-color: var(--win-close-hover);
+  color: #ffffff;
+}
+
+.win-control-btn.close:active {
+  background-color: var(--win-close-active);
+  color: #ffffff;
+}
+
+/* =============================================================
+ * macOS Titlebar Fine-Tuning (Apple HIG)
+ * ============================================================= */
+.desktop-window-container.macos .adaptive-titlebar {
+  padding-right: 12px;
+  background-color: var(--bg-surface-1);
+}
+
+.desktop-window-container.macos .titlebar-drag-region span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+}
+
+.desktop-window-container.macos .titlebar-preview-btn {
+  border-radius: var(--radius-button, 8px);
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border-subtle);
+  font-weight: 500;
+}
+
+/* =============================================================
+ * Titlebar Compact (≤860px — ukuran jendela kecil Windows)
+ * ============================================================= */
+@media (max-width: 860px) {
+  /* Sembunyikan label shortcut ⌘K / Ctrl+K di search pill — hanya ikon */
+  .titlebar-search-btn .macos-kbd {
+    display: none;
+  }
+
+  .titlebar-search-btn {
+    padding: 0 6px;
+    gap: 0;
+  }
+
+  /* Preview btn lebih ringkas */
+  .titlebar-preview-btn {
+    padding: 0 8px;
+    font-size: 10px;
+    gap: 4px;
+  }
+
+  .titlebar-preview-btn span:first-child {
+    display: none;
+  }
+}

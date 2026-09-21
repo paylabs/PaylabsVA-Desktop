@@ -1,0 +1,65 @@
+/**
+ * @file scrollbar.css
+ * @description Scrollbar modern minimalis, floating, dan seamless bergaya Apple HIG / WebKit.
+ */
+
+/* Webkit Scrollbar Styling (Chrome, Safari, Tauri Webview2/WKWebView) */
+::-webkit-scrollbar {
+  width: var(--scrollbar-width, 6px);
+  height: var(--scrollbar-width, 6px);
+}
+
+/* Track 100% transparan agar menyatu dengan latar belakang komponen */
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+/* Sudut pertemuan scrollbar X & Y transparan (anti-kotak putih/abu-abu) */
+::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+/* Hilangkan tombol stepper / panah bawaan browser */
+::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Thumb berbentuk kapsul membulat floating yang halus */
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb, rgba(140, 150, 165, 0.28));
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: content-box;
+  transition: background-color var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover, rgba(140, 150, 165, 0.55));
+}
+
+/* Firefox Scrollbar Standard & Global Anti-Bounce */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb, rgba(140, 150, 165, 0.28)) transparent;
+  overscroll-behavior: none;
+}
+
+/* Scrollbar khusus profil iOS (tipis 5px floating khas Apple HIG) */
+.desktop-window-container.ios ::-webkit-scrollbar {
+  width: var(--scrollbar-width-ios, 5px);
+  height: var(--scrollbar-width-ios, 5px);
+}
+
+.desktop-window-container.ios ::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb, rgba(140, 150, 165, 0.25));
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: content-box;
+}
+
+.desktop-window-container.ios ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover, rgba(140, 150, 165, 0.5));
+}
+

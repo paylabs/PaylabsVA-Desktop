@@ -1,0 +1,392 @@
+/**
+ * @file modalDialog.css
+ * @description Styling adaptif Dialog Modal desktop lintas platform (macOS Apple HIG, iOS UIAlertController, Windows Fluent 2).
+ */
+
+/* =============================================================
+ * 1. Backdrop Modal Dialog Universal
+ * ============================================================= */
+.desktop-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1040;
+  padding: 16px;
+  animation: modalBackdropFadeIn 0.2s ease-out;
+}
+
+@keyframes modalBackdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* =============================================================
+ * 2. Modal Card Base Container
+ * ============================================================= */
+.desktop-modal-card {
+  width: 100%;
+  max-width: 440px;
+  max-height: calc(100vh - 32px);
+  background-color: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card, 14px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: modalPopIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+@keyframes modalPopIn {
+  from {
+    transform: scale(0.95) translateY(-8px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* =============================================================
+ * 3. Modal Header
+ * ============================================================= */
+.desktop-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.desktop-modal-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.desktop-modal-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.desktop-modal-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+.desktop-modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color var(--transition-fast), color var(--transition-fast), transform 0.1s ease;
+}
+
+.desktop-modal-close-btn:hover {
+  background-color: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.desktop-modal-close-btn:active {
+  transform: scale(0.92);
+}
+
+/* =============================================================
+ * 4. Modal Body & Footer
+ * ============================================================= */
+.desktop-modal-body {
+  padding: 4px 20px 20px;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  line-height: 1.55;
+  overflow-y: auto;
+  overscroll-behavior: none;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.desktop-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 20px 16px;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+/* =============================================================
+ * 5. Button Base Styles
+ * ============================================================= */
+.desktop-modal-btn {
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--radius-button, 6px);
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: inherit;
+}
+
+.desktop-modal-btn-cancel {
+  background: var(--bg-surface-2);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.desktop-modal-btn-cancel:hover {
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.desktop-modal-btn-confirm {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+}
+
+.desktop-modal-btn-confirm:hover {
+  filter: brightness(1.08);
+}
+
+/* =============================================================
+ * 6. Adaptasi Spesifik Platform (macOS Apple HIG NSAlert / Sheet)
+ * ============================================================= */
+.desktop-window-container.macos .desktop-modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.desktop-window-container.macos .desktop-modal-card {
+  max-width: 420px;
+  max-height: calc(100vh - 32px);
+  border-radius: 18px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface-1);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="light"] .desktop-window-container.macos .desktop-modal-card {
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.18);
+}
+
+.desktop-window-container.macos .desktop-modal-header {
+  padding: 18px 22px 10px;
+}
+
+.desktop-window-container.macos .desktop-modal-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.desktop-window-container.macos .desktop-modal-close-btn {
+  display: none !important; /* Apple HIG: alert ditutup via tombol aksi atau Esc */
+}
+
+.desktop-window-container.macos .desktop-modal-body {
+  padding: 4px 22px 20px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.desktop-window-container.macos .desktop-modal-footer {
+  padding: 14px 22px 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+[data-theme="light"] .desktop-window-container.macos .desktop-modal-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.desktop-window-container.macos .desktop-modal-btn {
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 5px 16px;
+  min-width: 76px;
+  height: 28px;
+}
+
+.desktop-window-container.macos .desktop-modal-btn-cancel {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .desktop-window-container.macos .desktop-modal-btn-cancel {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #1d1d1f;
+}
+
+.desktop-window-container.macos .desktop-modal-btn-confirm {
+  background: #007aff;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 1px 3px rgba(0, 122, 255, 0.35);
+}
+
+/* =============================================================
+ * 7. Adaptasi Spesifik Platform (iOS UIAlertController Style)
+ * ============================================================= */
+.desktop-window-container.ios .desktop-modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.desktop-window-container.ios .desktop-modal-card {
+  max-width: 290px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(30, 35, 45, 0.92);
+  backdrop-filter: saturate(190%) blur(32px);
+  -webkit-backdrop-filter: saturate(190%) blur(32px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+[data-theme="light"] .desktop-window-container.ios .desktop-modal-card {
+  background: rgba(245, 245, 247, 0.94);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+}
+
+.desktop-window-container.ios .desktop-modal-header {
+  justify-content: center;
+  padding: 20px 16px 6px;
+  position: relative;
+  text-align: center;
+}
+
+.desktop-window-container.ios .desktop-modal-title {
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: -0.02em;
+  width: 100%;
+}
+
+.desktop-window-container.ios .desktop-modal-close-btn {
+  display: none !important; /* Apple HIG: iOS UIAlert tidak memiliki tombol silang [X] */
+}
+
+.desktop-window-container.ios .desktop-modal-body {
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 4px 18px 20px;
+  color: var(--text-secondary);
+}
+
+.desktop-window-container.ios .desktop-modal-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: 0;
+  display: flex;
+  gap: 0;
+  background: transparent;
+}
+
+.desktop-window-container.ios .desktop-modal-footer > * {
+  flex: 1;
+  height: 44px;
+  border-radius: 0 !important;
+  border: none !important;
+  padding: 0 12px !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  color: #007aff !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.desktop-window-container.ios .desktop-modal-footer > *:not(:last-child) {
+  border-right: 1px solid var(--border-subtle) !important;
+}
+
+.desktop-window-container.ios .desktop-modal-btn-confirm,
+.desktop-window-container.ios .desktop-modal-footer > *:last-child {
+  font-weight: 600 !important;
+}
+
+.desktop-window-container.ios .desktop-modal-footer > *:active {
+  background-color: rgba(140, 150, 165, 0.2) !important;
+}
+
+/* =============================================================
+ * 8. Adaptasi Spesifik Platform (Windows Fluent 2 Modern)
+ * ============================================================= */
+.desktop-window-container.windows .desktop-modal-card {
+  max-width: 440px;
+  max-height: calc(100vh - 32px);
+  border-radius: 8px;
+  border: 1px solid var(--border-medium);
+  background-color: var(--bg-surface-1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+.desktop-window-container.windows .desktop-modal-header {
+  padding: 16px 20px 12px;
+}
+
+.desktop-window-container.windows .desktop-modal-close-btn {
+  display: inline-flex !important;
+  border-radius: 4px;
+}
+
+.desktop-window-container.windows .desktop-modal-close-btn:hover {
+  background-color: #e81123;
+  color: #ffffff;
+}
+
+.desktop-window-container.windows .desktop-modal-footer {
+  padding: 14px 20px 18px;
+  gap: 8px;
+}
+
+.desktop-window-container.windows .desktop-modal-btn {
+  border-radius: 4px;
+  height: 32px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.desktop-window-container.windows .desktop-modal-btn-confirm {
+  background: var(--accent-primary);
+  color: #ffffff;
+}

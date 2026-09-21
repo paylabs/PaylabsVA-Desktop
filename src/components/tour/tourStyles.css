@@ -1,0 +1,299 @@
+/**
+ * @file tourStyles.css
+ * @description Kustomisasi styling Driver.js untuk konsistensi visual
+ *   dengan design system Paylabs VA. Menjamin kontras tinggi, background solid
+ *   opaque 100%, serta keterbacaan optimal baik pada Mode Gelap maupun Mode Terang.
+ */
+
+/* ============================================================
+   1. OVERLAY & BACKDROP
+   ============================================================ */
+
+/**
+ * Overlay backdrop cutout
+ * Menyelaraskan border radius overlay dengan kanvas jendela desktop 12px
+ * menggunakan clip-path round agar warna abu-abu tidak bocor ke sudut transparan jendela.
+ */
+.driver-overlay,
+svg.driver-overlay {
+  opacity: 0.72 !important;
+  border-radius: var(--radius-window, 12px) !important;
+  clip-path: inset(1px round var(--radius-window, 12px)) !important;
+  overflow: hidden !important;
+}
+
+/** Saat jendela dimaksimalkan, lepaskan clip-path rounded */
+body:has(.is-maximized) .driver-overlay,
+body:has(.is-maximized) svg.driver-overlay {
+  border-radius: 0 !important;
+  clip-path: none !important;
+}
+
+/* ============================================================
+   2. DRIVER.JS POPOVER CONTAINER (DARK MODE HIGH CONTRAST)
+   ============================================================ */
+
+/** Container utama popover tour - Default & Dark Mode (High Contrast Solid) */
+.driver-popover,
+[data-theme="dark"] .driver-popover {
+  background-color: #1c2331 !important;
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.28) !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  padding: 22px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif !important;
+  max-width: 360px !important;
+  min-width: 290px !important;
+  z-index: 1000000000 !important;
+}
+
+/** Judul langkah tour - Default & Dark Mode (High Contrast White) */
+.driver-popover-title,
+[data-theme="dark"] .driver-popover-title {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  margin-bottom: 8px !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/** Deskripsi langkah tour - Default & Dark Mode (High Contrast Slate 200) */
+.driver-popover-description,
+[data-theme="dark"] .driver-popover-description {
+  font-size: 13.5px !important;
+  color: #e2e8f0 !important;
+  line-height: 1.6 !important;
+  margin-bottom: 0 !important;
+}
+
+/* ============================================================
+   3. DRIVER.JS POPOVER (LIGHT MODE HIGH CONTRAST)
+   ============================================================ */
+
+/** Container utama popover tour - Light Mode (Zero Shadow, Crisp Border) */
+[data-theme="light"] .driver-popover {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #94a3b8 !important;
+  box-shadow: none !important;
+}
+
+/** Judul langkah tour - Light Mode */
+[data-theme="light"] .driver-popover-title {
+  color: #0f172a !important;
+}
+
+/** Deskripsi langkah tour - Light Mode */
+[data-theme="light"] .driver-popover-description {
+  color: #334155 !important;
+}
+
+/* ============================================================
+   4. NAVIGATION BUTTONS & CONTROLS
+   ============================================================ */
+
+/** Container footer tombol navigasi */
+.driver-popover-footer {
+  margin-top: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+}
+
+/** Progress indicator langkah (e.g., "1 dari 13") - Default & Dark Mode */
+.driver-popover-progress-text,
+[data-theme="dark"] .driver-popover-progress-text {
+  font-size: 12px !important;
+  color: #94a3b8 !important;
+  font-weight: 600 !important;
+}
+
+/** Progress indicator langkah - Light Mode */
+[data-theme="light"] .driver-popover-progress-text {
+  color: #64748b !important;
+}
+
+/** Tombol umum dalam footer */
+.driver-popover-footer button,
+.driver-popover-footer-btn {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  padding: 7px 14px !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  font-family: inherit !important;
+  line-height: 1.35 !important;
+  box-sizing: border-box !important;
+}
+
+/** Tombol Next / Done — Default & Dark Mode */
+.driver-popover-next-btn,
+[data-theme="dark"] .driver-popover-next-btn {
+  background-color: #6366f1 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+}
+
+.driver-popover-next-btn:hover,
+[data-theme="dark"] .driver-popover-next-btn:hover {
+  background-color: #4f46e5 !important;
+}
+
+/** Tombol Next / Done — Light Mode */
+[data-theme="light"] .driver-popover-next-btn {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+  border: 1px solid transparent !important;
+}
+
+[data-theme="light"] .driver-popover-next-btn:hover {
+  background-color: #4338ca !important;
+}
+
+/** Tombol Previous — Default & Dark Mode */
+.driver-popover-prev-btn,
+[data-theme="dark"] .driver-popover-prev-btn {
+  background-color: #283347 !important;
+  color: #f1f5f9 !important;
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+}
+
+.driver-popover-prev-btn:hover,
+[data-theme="dark"] .driver-popover-prev-btn:hover {
+  background-color: #334155 !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.38) !important;
+}
+
+/** Tombol Previous — Light Mode */
+[data-theme="light"] .driver-popover-prev-btn {
+  background-color: #f1f5f9 !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+[data-theme="light"] .driver-popover-prev-btn:hover {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+  border-color: #94a3b8 !important;
+}
+
+/** Tombol Close (X) di pojok kanan atas - Default & Dark Mode */
+.driver-popover-close-btn,
+[data-theme="dark"] .driver-popover-close-btn {
+  color: #94a3b8 !important;
+  font-size: 16px !important;
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+.driver-popover-close-btn:hover,
+[data-theme="dark"] .driver-popover-close-btn:hover {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/** Tombol Close (X) - Light Mode */
+[data-theme="light"] .driver-popover-close-btn {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .driver-popover-close-btn:hover {
+  color: #0f172a !important;
+  background-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+/* ============================================================
+   5. ARROW POINTER
+   ============================================================ */
+
+/** Arrow container dasar */
+.driver-popover-arrow {
+  border: 6px solid transparent !important;
+  position: absolute !important;
+}
+
+/** Arrow - Default & Dark Mode */
+.driver-popover-arrow-side-top,
+[data-theme="dark"] .driver-popover-arrow-side-top {
+  border-top-color: #1c2331 !important;
+  border-bottom-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+.driver-popover-arrow-side-bottom,
+[data-theme="dark"] .driver-popover-arrow-side-bottom {
+  border-bottom-color: #1c2331 !important;
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+.driver-popover-arrow-side-left,
+[data-theme="dark"] .driver-popover-arrow-side-left {
+  border-left-color: #1c2331 !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+.driver-popover-arrow-side-right,
+[data-theme="dark"] .driver-popover-arrow-side-right {
+  border-right-color: #1c2331 !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+  border-left-color: transparent !important;
+}
+
+/** Arrow - Light Mode */
+[data-theme="light"] .driver-popover-arrow-side-top {
+  border-top-color: #ffffff !important;
+  border-bottom-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+[data-theme="light"] .driver-popover-arrow-side-bottom {
+  border-bottom-color: #ffffff !important;
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+[data-theme="light"] .driver-popover-arrow-side-left {
+  border-left-color: #ffffff !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+[data-theme="light"] .driver-popover-arrow-side-right {
+  border-right-color: #ffffff !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+  border-left-color: transparent !important;
+}
+
+/* ============================================================
+   6. HIGHLIGHTED ELEMENT STAGE
+   ============================================================ */
+
+/** Elemen yang sedang aktif disorot */
+.driver-active-element {
+  border-radius: 8px !important;
+  outline: 2px solid #6366f1 !important;
+  outline-offset: 3px !important;
+}

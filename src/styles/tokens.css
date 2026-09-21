@@ -1,0 +1,133 @@
+/**
+ * @file tokens.css
+ * @description Design tokens global untuk tema solid, warna, border, radius rounded, dan spacing.
+ */
+
+:root {
+  /* Color Palette - Dark Mode Solid (Default Desktop) */
+  --bg-app: #0d1117;
+  --bg-surface-1: #161b22;
+  --bg-surface-2: #21262d;
+  --bg-surface-hover: rgba(255, 255, 255, 0.06);
+  --bg-surface-active: rgba(255, 255, 255, 0.1);
+
+  /* Surface Aliases (Kompatibilitas Global) */
+  --bg-primary: var(--bg-surface-1);
+  --bg-secondary: var(--bg-surface-2);
+  --bg-tertiary: var(--bg-surface-active);
+
+  /* Borders & Dividers - Dark Mode */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.14);
+  --border-focus: rgba(99, 102, 241, 0.6);
+  --border-window: transparent;
+
+  /* Typography Colors */
+  --text-primary: #f0f6fc;
+  --text-secondary: #9da7b3;
+  --text-tertiary: #6e7681;
+  --text-accent: #58a6ff;
+
+  /* Brand & Status Accents */
+  --accent-primary: #6366f1;
+  --accent-primary-hover: #4f46e5;
+  --accent-secondary: #06b6d4;
+  --accent-success: #22c55e;
+  --accent-warning: #eab308;
+  --accent-danger: #ef4444;
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+
+  /* Elevation & Shadows (Solid Rendering) */
+  --shadow-window: 0 12px 32px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-dropdown: none;
+
+  /* Radius Tokens (Semua sudut membulat elegan, bebas sudut lancip/pucuk) */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-card: 12px;
+  --radius-button: 8px;
+  --radius-badge: 8px;
+  --radius-window: 12px;
+
+  /* macOS Traffic Lights Colors */
+  --mac-close: #ff5f56;
+  --mac-minimize: #ffbd2e;
+  --mac-maximize: #27c93f;
+  --mac-stroke: rgba(0, 0, 0, 0.14);
+
+  /* Windows Control Colors */
+  --win-btn-hover: rgba(255, 255, 255, 0.08);
+  --win-btn-active: rgba(255, 255, 255, 0.14);
+  --win-close-hover: #e81123;
+  --win-close-active: #c4101f;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+
+  /* Chrome Heights */
+  --titlebar-height: 38px;
+  --titlebar-btn-height: 26px;
+
+  /* Spacing Tokens */
+  --space-content: 24px;
+  --space-content-compact: 16px;
+  --space-content-ios: 16px;
+  /* Scrollbar Tokens (Apple Overlay Seamless) */
+  --scrollbar-width: 6px;
+  --scrollbar-width-ios: 5px;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.18);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.38);
+}
+
+[data-theme="light"] {
+  /* Color Palette - Light Mode High Contrast & Sharp */
+  --bg-app: #f1f5f9;
+  --bg-surface-1: #ffffff;
+  --bg-surface-2: #e8ecf2;
+  --bg-surface-hover: rgba(15, 23, 42, 0.05);
+  /* Surface Aliases (Kompatibilitas Global) */
+  --bg-primary: var(--bg-surface-1);
+  --bg-secondary: var(--bg-surface-2);
+  --bg-tertiary: var(--bg-surface-active);
+
+  /* Borders & Dividers - Light Mode Tegas & Kontras */
+  --border-subtle: #cbd5e1;
+  --border-medium: #94a3b8;
+  --border-focus: rgba(79, 70, 229, 0.7);
+  --border-window: #cbd5e1;
+
+  /* Typography Colors (Tinggi Kontras, Bebas Faded) */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-tertiary: #64748b;
+  --text-accent: #0284c7;
+
+  /* Brand & Status Accents (Versi Kontras Terang) */
+  --accent-primary: #4f46e5;
+  --accent-primary-hover: #4338ca;
+  --accent-secondary: #0284c7;
+  --accent-success: #16a34a;
+  --accent-warning: #d97706;
+  --accent-danger: #dc2626;
+  --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #0284c7 100%);
+
+  /* Elevation & Shadows (Memberikan Definisi Layer Kartu) */
+  --shadow-window: 0 8px 24px rgba(15, 23, 42, 0.12);
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-dropdown: none;
+
+  /* Windows Control Hover - Light Mode */
+  --win-btn-hover: rgba(15, 23, 42, 0.06);
+  --win-btn-active: rgba(15, 23, 42, 0.12);
+  --win-close-hover: #e81123;
+  --win-close-active: #c4101f;
+
+  /* Scrollbar Tokens Light Mode */
+  --scrollbar-thumb: rgba(100, 116, 139, 0.32);
+  --scrollbar-thumb-hover: rgba(100, 116, 139, 0.58);
+}

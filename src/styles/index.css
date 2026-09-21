@@ -1,0 +1,244 @@
+/**
+ * @file index.css
+ * @description Root stylesheet aplikasi dengan rounded window, solid background, dan micro-interactions hover bergaya macOS & Windows.
+ */
+
+@import './tokens.css';
+@import './typography.css';
+@import './scrollbar.css';
+@import './titlebar.css';
+@import './responsive.css';
+@import './iosTheme.css';
+@import './macosVibrancy.css';
+@import './popovers.css';
+@import './modalDialog.css';
+@import './paylabs.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+/* Hilangkan outline hitam bawaan browser Chromium / Webview2 */
+button,
+input,
+select,
+textarea,
+a {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Focus ring yang halus dan elegan hanya saat menggunakan keyboard navigasi */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-primary) !important;
+  outline-offset: 1px;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background-color: transparent;
+  border: none !important;
+  outline: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background-color: transparent;
+  border: none !important;
+  outline: none !important;
+  padding: 1px;
+  box-sizing: border-box;
+  display: flex;
+}
+
+#root:has(.is-maximized) {
+  padding: 0 !important;
+}
+
+body {
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Accessibility helper: visually hidden but accessible for assistive tech and tests */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Container Window Desktop Rounded (Membulat Cantik & Solid) */
+.desktop-window-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  box-sizing: border-box;
+  background-color: var(--bg-app);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-window, 12px);
+  overflow: hidden;
+  transition: border-radius 0.15s ease;
+}
+
+/* Sudut membulat diwariskan ke titlebar di atas dan status bar / tab bar di bawah */
+.adaptive-titlebar {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.status-bar-container,
+.ios-tab-bar {
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+/* Saat mode maximized: sudut kembali persegi penuh */
+.desktop-window-container.is-maximized {
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* =============================================================
+ * macOS Style Hover & Micro-Interactions
+ * ============================================================= */
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  height: 38px;
+  width: 100%;
+  padding: 0 9px;
+  box-sizing: border-box;
+  border-radius: var(--radius-button);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.14s ease,
+              color 0.14s ease,
+              transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.sidebar-nav-item:hover {
+  background-color: var(--bg-surface-hover);
+  color: var(--text-primary);
+  transform: translateX(2px);
+}
+
+.sidebar-nav-item:active {
+  transform: scale(0.97);
+}
+
+.sidebar-nav-item.active {
+  background-color: var(--bg-surface-2);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Penyesuaian spesifik saat mode macOS aktif */
+.desktop-window-container.macos .sidebar-nav-item {
+  border-radius: var(--radius-button, 8px);
+}
+
+.desktop-window-container.macos .sidebar-nav-item.active {
+  background-color: rgba(99, 102, 241, 0.12);
+  color: var(--accent-primary);
+}
+
+.desktop-window-container.macos button {
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.desktop-window-container.macos button:hover {
+  filter: brightness(1.05);
+}
+
+.desktop-window-container.macos button:active {
+  transform: scale(0.97);
+}
+
+/* =============================================================
+ * macOS Native Segmented Controls & UI Elements
+ * ============================================================= */
+.macos-segmented-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background-color: var(--bg-surface-2);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  user-select: none;
+}
+
+.macos-segmented-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.macos-segmented-item:hover {
+  color: var(--text-primary);
+}
+
+.macos-segmented-item.active {
+  background-color: var(--bg-surface-1);
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.desktop-window-container.macos input[type="text"]:not(.macos-command-input),
+.desktop-window-container.macos input[type="password"] {
+  border-radius: 7px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.desktop-window-container.macos input[type="text"]:not(.macos-command-input):focus,
+.desktop-window-container.macos input[type="password"]:focus {
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
+}
