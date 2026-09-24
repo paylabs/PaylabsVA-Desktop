@@ -61,11 +61,13 @@ export const AppShell: React.FC = () => {
     .join(' ');
 
   const pageTitle =
-    activeTab === 'va-generator'
-      ? 'Generate Virtual Account'
-      : activeTab === 'va-history'
-        ? 'Riwayat Virtual Account'
-        : 'Panduan Pengguna';
+    activeTab === 'static-va'
+      ? 'Generate Static Virtual Account'
+      : activeTab === 'va-generator'
+        ? 'Generate Dynamic Virtual Account'
+        : activeTab === 'va-history'
+          ? 'Riwayat Virtual Account'
+          : 'Panduan Pengguna';
 
   const handleTourEnd = useCallback(() => {
     setIsTourRunning(false);
@@ -106,9 +108,19 @@ export const AppShell: React.FC = () => {
           }}
         />
 
-        {activeTab === 'va-generator' ? (
-          <main className="main-content-scroll">
+        {activeTab === 'static-va' ? (
+          <main className="main-content-scroll va-generator-main">
             <VaGeneratorView
+              mode="static"
+              onShowToast={showToast}
+              onOpenSettings={() => setIsSettingsOpen(true)}
+              onVaCreated={refreshHistory}
+            />
+          </main>
+        ) : activeTab === 'va-generator' ? (
+          <main className="main-content-scroll va-generator-main">
+            <VaGeneratorView
+              mode="dynamic"
               onShowToast={showToast}
               onOpenSettings={() => setIsSettingsOpen(true)}
               onVaCreated={refreshHistory}

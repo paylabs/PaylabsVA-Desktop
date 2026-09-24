@@ -140,6 +140,13 @@
   color: var(--text-secondary);
 }
 
+.paylabs-required-star {
+  color: var(--accent-danger, #ef4444);
+  margin-left: 3px;
+  font-weight: 700;
+  user-select: none;
+}
+
 .paylabs-mac-input {
   width: 100%;
   height: 33px;
@@ -671,6 +678,66 @@
   color: var(--text-primary);
   font-weight: 600;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Layout Generator VA (Static & Dynamic): Kanvas & Kontainer Terkunci, Scroll Khusus di Dalam Form Card */
+.paylabs-page-container.va-generator-fixed-container {
+  height: 100%;
+  max-height: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 14px;
+}
+
+.paylabs-page-container.va-generator-fixed-container .paylabs-warning-strip {
+  flex-shrink: 0;
+}
+
+.paylabs-page-container.va-generator-fixed-container .paylabs-mac-split-grid {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  align-items: stretch;
+}
+
+.paylabs-page-container.va-generator-fixed-container .paylabs-form-card {
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  scrollbar-gutter: stable;
+}
+
+.paylabs-page-container.va-generator-fixed-container .paylabs-form-card .paylabs-card-header {
+  flex-shrink: 0;
+  position: sticky;
+  top: -14px;
+  margin-top: -14px;
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-top: 14px;
+  padding-left: 16px;
+  padding-right: 16px;
+  background: var(--bg-surface-1);
+  z-index: 5;
+}
+
+.paylabs-page-container.va-generator-fixed-container .paylabs-result-card,
+.paylabs-page-container.va-generator-fixed-container .paylabs-result-placeholder {
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  scrollbar-gutter: stable;
 }
 
 /* Layout Riwayat VA: Kanvas Terkunci (Fixed Viewport) & Scroll Khusus Tabel */

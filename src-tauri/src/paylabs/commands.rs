@@ -137,12 +137,16 @@ pub fn paylabs_get_channels() -> Result<Vec<Channel>, String> {
 }
 
 /// Format nominal desimal dengan trailing '.00' sesuai spesifikasi SNAP.
-fn format_amount_decimal(amount_str: &str) -> Result<String, String> {
+/// Jika is_static adalah true, nominal diizinkan bernilai 0.00 (Open Amount).
+fn format_amount_decimal(amount_str: &str, is_static: bool) -> Result<String, String> {
     let clean = amount_str.replace(',', "").trim().to_string();
     let val: f64 = clean
         .parse()
         .map_err(|_| "Format nominal tidak valid".to_string())?;
-    if val <= 0.0 {
+    if val < 0.0 {
+        return Err("Nominal tidak boleh negatif".into());
+    }
+    if !is_static && val <= 0.0 {
         return Err("Nominal harus lebih besar dari 0".into());
     }
     Ok(format!("{:.2}", val))
@@ -197,7 +201,8 @@ pub async fn paylabs_create_va(form: CreateVaForm) -> Result<Exchange, String> {
     if form.name.trim().is_empty() {
         return Err("Nama pemilik VA wajib diisi".into());
     }
-    let formatted_amount = format_amount_decimal(&form.amount)?;
+    let is_static = form.channel.trim().starts_with("Static");
+    let formatted_amount = format_amount_decimal(&form.amount, is_static)?;
 
     let cfg = load_config().unwrap_or_default();
     let cred = cfg.current_credential();

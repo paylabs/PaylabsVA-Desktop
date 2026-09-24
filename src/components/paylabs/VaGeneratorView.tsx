@@ -20,6 +20,7 @@ import { Tooltip } from '../ui/Tooltip';
 import { VaInspectorDrawer } from './VaInspectorDrawer';
 
 export interface VaGeneratorViewProps {
+  mode?: 'dynamic' | 'static';
   onShowToast: (title: string, message?: string, type?: 'info' | 'success' | 'warning' | 'error') => void;
   onOpenSettings?: () => void;
   onVaCreated?: () => void;
@@ -91,6 +92,7 @@ interface FormErrors {
  * Komponen Form Input Pembuatan VA macOS
  */
 interface VaFormSectionProps {
+  mode: 'dynamic' | 'static';
   channel: string;
   setChannel: (val: string) => void;
   channelOptions: Array<{ value: string; label: string }>;
@@ -111,6 +113,7 @@ interface VaFormSectionProps {
 }
 
 const VaFormSection: React.FC<VaFormSectionProps> = ({
+  mode,
   channel,
   setChannel,
   channelOptions,
@@ -132,13 +135,17 @@ const VaFormSection: React.FC<VaFormSectionProps> = ({
   return (
     <form className="paylabs-mac-card paylabs-form-card" onSubmit={onSubmit} noValidate>
       <div className="paylabs-card-header">
-        <h3 className="paylabs-card-title">Parameter Virtual Account</h3>
+        <h3 className="paylabs-card-title">
+          {mode === 'static' ? 'Parameter Static Virtual Account' : 'Parameter Dynamic Virtual Account'}
+        </h3>
       </div>
 
       <div className="paylabs-form-body">
         {/* Channel Bank */}
         <div id="va-bank-selector" className="paylabs-field">
-          <label className="paylabs-label">Pilih Channel Bank</label>
+          <label className="paylabs-label">
+            Pilih Channel Bank <span className="paylabs-required-star" aria-label="wajib diisi">*</span>
+          </label>
           <CustomSelect
             value={channel}
             onChange={(val) => {
@@ -147,8 +154,7 @@ const VaFormSection: React.FC<VaFormSectionProps> = ({
             }}
             options={channelOptions}
             placeholder="Pilih Bank"
-            searchable={true}
-            searchPlaceholder="Cari bank..."
+            searchable={false}
             hasError={Boolean(errors.channel)}
           />
           {errors.channel && (
@@ -161,7 +167,9 @@ const VaFormSection: React.FC<VaFormSectionProps> = ({
 
         {/* Nama Pemilik */}
         <div className="paylabs-field">
-          <label className="paylabs-label">Nama Pelanggan (Customer Name)</label>
+          <label className="paylabs-label">
+            Nama Pelanggan (Customer Name) <span className="paylabs-required-star" aria-label="wajib diisi">*</span>
+          </label>
           <input
             type="text"
             className={`paylabs-mac-input ${errors.name ? 'is-invalid' : ''}`}
@@ -195,47 +203,85 @@ const VaFormSection: React.FC<VaFormSectionProps> = ({
           />
         </div>
 
-        {/* Nominal & Preset Pill */}
-        <div id="va-amount-input" className="paylabs-field">
-          <div className="flex items-center justify-between mb-1">
-            <label className="paylabs-label mb-0">Nominal Tagihan (IDR)</label>
-            <span className="text-xs font-mono text-accent font-semibold">
-              {formatRupiahDisplay(amount)}
-            </span>
-          </div>
-          <input
-            type="number"
-            className={`paylabs-mac-input font-mono ${errors.amount ? 'is-invalid' : ''}`}
-            placeholder="Nominal tagihan"
-            value={amount}
-            onChange={(e) => {
-              setAmount(e.target.value);
-              if (errors.amount) onClearError('amount');
-            }}
-            min="10000"
-          />
-          {errors.amount && (
-            <div className="paylabs-field-error">
-              <AlertCircle size={12} />
-              <span>{errors.amount}</span>
-            </div>
-          )}
-          <div className="paylabs-presets-row">
-            {PRESET_AMOUNTS.map((preset) => (
-              <button
-                key={preset.value}
-                type="button"
-                className={`paylabs-preset-pill ${amount === preset.value ? 'active' : ''}`}
-                onClick={() => {
-                  setAmount(preset.value);
-                  if (errors.amount) onClearError('amount');
+        {/* Nominal & Preset Pill (Hanya tampil pada Dynamic VA, ditiadakan pada Static VA) */}
+        {mode === 'static' ? (
+          <div id="va-static-amount-info" className="paylabs-field">
+            <label className="paylabs-label">Nominal Pembayaran</label>
+            <div
+              style={{
+                padding: '12px 14px',
+                background: 'rgba(52, 199, 89, 0.08)',
+                border: '1px solid rgba(52, 199, 89, 0.25)',
+                borderRadius: 8,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+              }}
+            >
+              <span
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: '50%',
+                  backgroundColor: '#34c759',
+                  boxShadow: '0 0 6px rgba(52, 199, 89, 0.6)',
+                  flexShrink: 0,
                 }}
-              >
-                {preset.label}
-              </button>
-            ))}
+              />
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--text-primary)' }}>
+                  Open Payment (Rp 0.00 / Bebas Nominal)
+                </span>
+                <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>
+                  Static Virtual Account menerima nominal transfer bebas dari pembayar tanpa pembatasan jumlah tetap.
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div id="va-amount-input" className="paylabs-field">
+            <div className="flex items-center justify-between mb-1">
+              <label className="paylabs-label mb-0">
+                Nominal Tagihan (IDR) <span className="paylabs-required-star" aria-label="wajib diisi">*</span>
+              </label>
+              <span className="text-xs font-mono text-accent font-semibold">
+                {formatRupiahDisplay(amount)}
+              </span>
+            </div>
+            <input
+              type="number"
+              className={`paylabs-mac-input font-mono ${errors.amount ? 'is-invalid' : ''}`}
+              placeholder="Nominal tagihan"
+              value={amount}
+              onChange={(e) => {
+                setAmount(e.target.value);
+                if (errors.amount) onClearError('amount');
+              }}
+              min="10000"
+            />
+            {errors.amount && (
+              <div className="paylabs-field-error">
+                <AlertCircle size={12} />
+                <span>{errors.amount}</span>
+              </div>
+            )}
+            <div className="paylabs-presets-row">
+              {PRESET_AMOUNTS.map((preset) => (
+                <button
+                  key={preset.value}
+                  type="button"
+                  className={`paylabs-preset-pill ${amount === preset.value ? 'active' : ''}`}
+                  onClick={() => {
+                    setAmount(preset.value);
+                    if (errors.amount) onClearError('amount');
+                  }}
+                >
+                  {preset.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Masa Berlaku */}
         <div className="paylabs-field">
@@ -273,7 +319,7 @@ const VaFormSection: React.FC<VaFormSectionProps> = ({
             <span>Menandatangani & Mengirim SNAP...</span>
           ) : (
             <>
-              <span>Generate Virtual Account</span>
+              <span>{mode === 'static' ? 'Generate Static Virtual Account' : 'Generate Dynamic Virtual Account'}</span>
               <ArrowRight size={15} />
             </>
           )}
@@ -287,6 +333,7 @@ const VaFormSection: React.FC<VaFormSectionProps> = ({
  * Komponen Kartu Hasil VA macOS
  */
 interface ResultSectionProps {
+  mode: 'dynamic' | 'static';
   createdVa: any;
   copiedVa: boolean;
   onCopyVa: (vaNo: string) => void;
@@ -294,6 +341,7 @@ interface ResultSectionProps {
 }
 
 const ResultSection: React.FC<ResultSectionProps> = ({
+  mode,
   createdVa,
   copiedVa,
   onCopyVa,
@@ -316,6 +364,10 @@ const ResultSection: React.FC<ResultSectionProps> = ({
   const vaNo = createdVa.virtualAccountNo || '-';
   const vaName = createdVa.virtualAccountName || createdVa.customerName || '-';
   const totalVal = createdVa.totalAmount?.value || '-';
+  const totalDisplay =
+    mode === 'static' || totalVal === '0.00' || totalVal === '0'
+      ? 'Rp 0 (Open Amount)'
+      : formatRupiahDisplay(totalVal);
 
   return (
     <div className="paylabs-mac-card paylabs-result-card animate-scale-in">
@@ -360,7 +412,7 @@ const ResultSection: React.FC<ResultSectionProps> = ({
         <div className="paylabs-result-item">
           <span className="paylabs-result-label">Total Tagihan</span>
           <span className="paylabs-result-value font-mono font-semibold text-accent">
-            {formatRupiahDisplay(totalVal)}
+            {totalDisplay}
           </span>
         </div>
         <div className="paylabs-result-item">
@@ -384,21 +436,30 @@ const ResultSection: React.FC<ResultSectionProps> = ({
  * View Utama Generator VA Bergaya Native macOS
  */
 export const VaGeneratorView: React.FC<VaGeneratorViewProps> = ({
+  mode = 'dynamic',
   onShowToast,
   onOpenSettings,
   onVaCreated,
 }) => {
-  const { status, channels, isSubmitting, lastExchange, submitCreateVa } = usePaylabs();
+  const isStatic = mode === 'static';
+  const { status, isSubmitting, lastExchange, submitCreateVa } = usePaylabs();
 
-  const [channel, setChannel] = useState('');
+  const [channel, setChannel] = useState(isStatic ? 'StaticBNIVA' : 'MultipleBNIVA');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [amount, setAmount] = useState('100000');
+  const [amount, setAmount] = useState(isStatic ? '0' : '100000');
   const [expiryDays, setExpiryDays] = useState('30');
   const [trxId, setTrxId] = useState('');
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [copiedVa, setCopiedVa] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
+
+  // Sinkronisasi bila prop mode berubah
+  React.useEffect(() => {
+    setChannel(isStatic ? 'StaticBNIVA' : 'MultipleBNIVA');
+    setAmount(isStatic ? '0' : '100000');
+    setErrors({});
+  }, [isStatic]);
 
   const handleClearError = (field: keyof FormErrors) => {
     setErrors((prev) => {
@@ -417,9 +478,11 @@ export const VaGeneratorView: React.FC<VaGeneratorViewProps> = ({
     if (!name.trim()) {
       newErrors.name = 'Nama pelanggan wajib diisi';
     }
-    const parsedAmount = parseFloat(amount);
-    if (!amount || isNaN(parsedAmount) || parsedAmount < 10000) {
-      newErrors.amount = 'Nominal tagihan minimal Rp 10.000';
+    if (!isStatic) {
+      const parsedAmount = parseFloat(amount);
+      if (!amount || isNaN(parsedAmount) || parsedAmount < 10000) {
+        newErrors.amount = 'Nominal tagihan minimal Rp 10.000';
+      }
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -441,7 +504,7 @@ export const VaGeneratorView: React.FC<VaGeneratorViewProps> = ({
       channel,
       name: name.trim(),
       phone: phone.trim() || undefined,
-      amount: amount.trim(),
+      amount: isStatic ? '0' : amount.trim(),
       expiryDays: parseInt(expiryDays, 10) || 30,
       trxId: trxId.trim() || undefined,
     };
@@ -462,15 +525,23 @@ export const VaGeneratorView: React.FC<VaGeneratorViewProps> = ({
     setTimeout(() => setCopiedVa(false), 2000);
   };
 
-  const channelOptions = channels.map((c) => ({
-    value: c.id,
-    label: `${c.name} (${c.code})`,
-  }));
+  // Pilihan channel bank yang didukung: BNI (default), BCA, dan Mandiri
+  const channelOptions = isStatic
+    ? [
+        { value: 'StaticBNIVA', label: 'BNI (009)' },
+        { value: 'StaticBCAVA', label: 'BCA (014)' },
+        { value: 'StaticMandiriVA', label: 'Mandiri (008)' },
+      ]
+    : [
+        { value: 'MultipleBNIVA', label: 'BNI (009)' },
+        { value: 'MultipleBCAVA', label: 'BCA (014)' },
+        { value: 'MultipleMandiriVA', label: 'Mandiri (008)' },
+      ];
 
   const createdVa = lastExchange?.success ? lastExchange.parsed?.virtualAccountData : null;
 
   return (
-    <div className="paylabs-page-container">
+    <div className="paylabs-page-container va-generator-fixed-container">
       {/* Banner Peringatan jika belum dikonfigurasi */}
       {status && !status.configured && (
         <div className="paylabs-warning-strip">
@@ -528,6 +599,7 @@ export const VaGeneratorView: React.FC<VaGeneratorViewProps> = ({
       {/* Grid Split 2-Kolom macOS */}
       <div className="paylabs-mac-split-grid">
         <VaFormSection
+          mode={mode}
           channel={channel}
           setChannel={setChannel}
           channelOptions={channelOptions}
@@ -548,6 +620,7 @@ export const VaGeneratorView: React.FC<VaGeneratorViewProps> = ({
         />
 
         <ResultSection
+          mode={mode}
           createdVa={createdVa}
           copiedVa={copiedVa}
           onCopyVa={handleCopyVa}

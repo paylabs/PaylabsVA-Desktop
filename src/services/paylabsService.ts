@@ -14,6 +14,18 @@ import {
 } from '../types/paylabs';
 import { isTauriEnvironment } from './windowService';
 
+export const DYNAMIC_CHANNELS: readonly Channel[] = [
+  { id: 'MultipleBNIVA', code: '009', name: 'BNI' },
+  { id: 'MultipleBCAVA', code: '014', name: 'BCA' },
+  { id: 'MultipleMandiriVA', code: '008', name: 'Mandiri' },
+];
+
+export const STATIC_CHANNELS: readonly Channel[] = [
+  { id: 'StaticBNIVA', code: '009', name: 'BNI' },
+  { id: 'StaticBCAVA', code: '014', name: 'BCA' },
+  { id: 'StaticMandiriVA', code: '008', name: 'Mandiri' },
+];
+
 const MOCK_CHANNELS: Channel[] = [
   { id: 'BCA', code: '014', name: 'BCA' },
   { id: 'BNI', code: '009', name: 'BNI' },
@@ -23,6 +35,12 @@ const MOCK_CHANNELS: Channel[] = [
   { id: 'DANAMON', code: '011', name: 'Danamon' },
   { id: 'CIMB', code: '022', name: 'CIMB' },
   { id: 'BSI', code: '451', name: 'BSI' },
+  { id: 'MultipleBNIVA', code: '009', name: 'BNI (Dynamic VA)' },
+  { id: 'MultipleBCAVA', code: '014', name: 'BCA (Dynamic VA)' },
+  { id: 'MultipleMandiriVA', code: '008', name: 'Mandiri (Dynamic VA)' },
+  { id: 'StaticBNIVA', code: '009', name: 'BNI (Static VA)' },
+  { id: 'StaticBCAVA', code: '014', name: 'BCA (Static VA)' },
+  { id: 'StaticMandiriVA', code: '008', name: 'Mandiri (Static VA)' },
 ];
 
 /**

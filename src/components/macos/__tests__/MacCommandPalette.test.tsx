@@ -59,11 +59,34 @@ describe('MacCommandPalette Component (Apple HIG)', () => {
     );
 
     // Act
-    const vaGenBtn = screen.getByText('Buka Paylabs VA Generator');
+    const vaGenBtn = screen.getByText(/Dynamic VA Generator/i);
     fireEvent.click(vaGenBtn);
 
     // Assert
     expect(handleSelectTab).toHaveBeenCalledWith('va-generator');
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
+
+  it('should_select_static_va_tab_when_static_va_command_is_clicked', () => {
+    // Arrange
+    const handleSelectTab = vi.fn();
+    const handleClose = vi.fn();
+
+    render(
+      <MacCommandPalette
+        isOpen={true}
+        onClose={handleClose}
+        onSelectTab={handleSelectTab}
+        onToggleTheme={vi.fn()}
+      />
+    );
+
+    // Act
+    const staticVaBtn = screen.getByText(/Static VA Generator/i);
+    fireEvent.click(staticVaBtn);
+
+    // Assert
+    expect(handleSelectTab).toHaveBeenCalledWith('static-va');
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 

@@ -42,11 +42,26 @@
   padding-right: calc(var(--space-content-ios, 16px) - var(--scrollbar-width-ios, 5px));
 }
 
-/* Layout Khusus Riwayat VA: Kanvas statis terkunci, scroll hanya di tabel */
+/* Layout Khusus Kanvas Terkunci (Generator VA & Riwayat VA): Margin 4 sisi seragam dan simetris */
+.main-content-scroll.va-generator-main,
 .main-content-scroll.va-history-main {
   overflow-y: hidden;
   height: 100%;
   min-height: 0;
+  scrollbar-gutter: auto;
+  padding: var(--space-content-compact, 16px);
+}
+
+@media (max-width: 900px) {
+  .main-content-scroll.va-generator-main,
+  .main-content-scroll.va-history-main {
+    padding: 14px;
+  }
+}
+
+.desktop-window-container.ios .main-content-scroll.va-generator-main,
+.desktop-window-container.ios .main-content-scroll.va-history-main {
+  padding: var(--space-content-ios, 16px);
 }
 
 /* =============================================================

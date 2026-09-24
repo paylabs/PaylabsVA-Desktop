@@ -101,7 +101,7 @@ const ManualHeader: React.FC = () => {
         <div className="manual-header-badge-row">
           <span className="manual-badge badge-accent">Standar SNAP BI</span>
           <span className="manual-badge">Tauri v2 Native</span>
-          <span className="manual-badge">Versi 0.1.0</span>
+          <span className="manual-badge">Versi 0.1.1</span>
         </div>
         <h1 className="manual-page-title">
           <BookOpen size={22} style={{ color: 'var(--accent-primary)' }} />
@@ -141,12 +141,12 @@ const SectionArchitecture: React.FC = () => (
         <tbody>
           <tr>
             <td><strong>SIT (Sandbox)</strong></td>
-            <td><code className="manual-code">https://sit-snap.paylabs.co.id</code></td>
+            <td><code className="manual-code">https://sit-pay.paylabs.co.id</code></td>
             <td>Pengujian fungsionalitas, simulasi pembayaran, dan verifikasi alur integrasi tanpa dana riil.</td>
           </tr>
           <tr>
             <td><strong>Production</strong></td>
-            <td><code className="manual-code">https://snap.paylabs.co.id</code></td>
+            <td><code className="manual-code">https://pay.paylabs.co.id</code></td>
             <td>Operasional transaksi perbankan aktif dengan pemotongan saldo dan dana riil.</td>
           </tr>
         </tbody>
@@ -227,8 +227,16 @@ const SectionGenerateVa: React.FC = () => (
       Spesifikasi Pembuatan Virtual Account
     </h2>
     <p>
-      Modul generator memproses pembuatan nomor Virtual Account dengan parameter terstandarisasi SNAP:
+      Modul generator memproses pembuatan nomor Virtual Account dengan parameter terstandarisasi SNAP dalam dua mode spesifik:
     </p>
+    <ul>
+      <li>
+        <strong>Dynamic VA (MultipleBNIVA)</strong> — Virtual account dinamis dengan nominal tagihan yang ditentukan (minimal Rp 10.000) dan opsi masa berlaku.
+      </li>
+      <li>
+        <strong>Static VA (StaticBNIVA)</strong> — Virtual account statis dengan nominal bebas (Open Payment / Rp 0.00) tanpa kolom nominal tetap.
+      </li>
+    </ul>
     <div className="manual-table-wrapper">
       <table className="manual-table">
         <thead>

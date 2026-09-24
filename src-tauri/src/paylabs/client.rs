@@ -30,13 +30,16 @@ pub fn get_available_channels() -> Vec<Channel> {
         Channel { id: "MultipleSinarmasVA".into(), code: "153".into(), name: "Sinarmas".into() },
         Channel { id: "MultipleMuamalatVA".into(), code: "147".into(), name: "Muamalat".into() },
         Channel { id: "MultipleMaybankVA".into(), code: "016".into(), name: "Maybank".into() },
+        Channel { id: "StaticBNIVA".into(), code: "009".into(), name: "BNI (Static)".into() },
+        Channel { id: "StaticBCAVA".into(), code: "014".into(), name: "BCA (Static)".into() },
+        Channel { id: "StaticMandiriVA".into(), code: "008".into(), name: "Mandiri (Static)".into() },
     ]
 }
 
-/// Normalisasi paymentType SNAP Paylabs (misal "BCA" -> "MultipleBCAVA").
+/// Normalisasi paymentType SNAP Paylabs (misal "BCA" -> "MultipleBCAVA", "StaticBNIVA" -> "StaticBNIVA").
 pub fn normalize_payment_type(channel: &str) -> String {
     let trimmed = channel.trim();
-    if trimmed.starts_with("Multiple") && trimmed.ends_with("VA") {
+    if (trimmed.starts_with("Multiple") || trimmed.starts_with("Static")) && trimmed.ends_with("VA") {
         return trimmed.to_string();
     }
     match trimmed.to_uppercase().as_str() {

@@ -5,6 +5,7 @@ import {
   Key,
   Sun,
   Receipt,
+  Layers,
 } from 'lucide-react';
 import { ActiveTab } from '../../layout/Sidebar';
 import { HistoryRecord } from '../../../types/paylabs';
@@ -49,10 +50,19 @@ export function buildCommandItems(p: BuildCommandParams): CommandItem[] {
   const items: CommandItem[] = [
     {
       id: 'tab-va-gen',
-      title: 'Buka Paylabs VA Generator',
+      title: 'Buka Dynamic VA Generator (MultipleBNIVA)',
       category: 'Navigasi',
       icon: <CreditCard size={16} />,
+      keywords: ['dynamic', 'va', 'generator', 'bni', 'multiple', 'buka paylabs va generator'],
       perform: () => p.onSelectTab('va-generator'),
+    },
+    {
+      id: 'tab-va-stat',
+      title: 'Buka Static VA Generator (StaticBNIVA)',
+      category: 'Navigasi',
+      icon: <Layers size={16} />,
+      keywords: ['static', 'va', 'generator', 'bni', 'open amount', '0'],
+      perform: () => p.onSelectTab('static-va'),
     },
     {
       id: 'tab-va-hist',

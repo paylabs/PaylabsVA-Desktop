@@ -30,7 +30,8 @@ describe('Sidebar Component', () => {
     );
 
     // Assert
-    expect(screen.getByText('Generate VA')).toBeDefined();
+    expect(screen.getByText('Dynamic VA')).toBeDefined();
+    expect(screen.getByText('Static VA')).toBeDefined();
     expect(screen.getByText('Riwayat VA')).toBeDefined();
     expect(screen.getByText('Navigation')).toBeDefined();
   });
@@ -133,7 +134,7 @@ describe('Sidebar Component', () => {
       />
     );
 
-    const generateVaButton = screen.getByLabelText('Generate VA');
+    const generateVaButton = screen.getByLabelText('Dynamic VA');
 
     // Act
     fireEvent.mouseEnter(generateVaButton);
@@ -144,7 +145,26 @@ describe('Sidebar Component', () => {
     // Assert
     const tooltip = screen.getByRole('tooltip');
     expect(tooltip).toBeDefined();
-    expect(tooltip.textContent).toContain('Generate VA');
+    expect(tooltip.textContent).toContain('Dynamic VA');
+  });
+
+  it('should_call_onSelectTab_with_static_va_when_static_va_nav_item_is_clicked', () => {
+    // Arrange
+    const handleSelectTab = vi.fn();
+    render(
+      <Sidebar
+        activeTab="va-generator"
+        onSelectTab={handleSelectTab}
+        isCollapsed={false}
+      />
+    );
+
+    // Act
+    const staticVaButton = screen.getByText('Static VA');
+    fireEvent.click(staticVaButton);
+
+    // Assert
+    expect(handleSelectTab).toHaveBeenCalledWith('static-va');
   });
 });
 

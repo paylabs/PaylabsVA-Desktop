@@ -161,7 +161,7 @@ export const PaylabsSettingsModal: React.FC<PaylabsSettingsModalProps> = ({
         {/* Input Partner ID */}
         <div className="paylabs-modal-field">
           <label className="paylabs-modal-label">
-            Partner ID ({selectedEnv})
+            Partner ID ({selectedEnv}) <span className="paylabs-required-star" aria-label="wajib diisi">*</span>
           </label>
           <input
             type="text"
@@ -177,7 +177,7 @@ export const PaylabsSettingsModal: React.FC<PaylabsSettingsModalProps> = ({
         <div className="paylabs-modal-field">
           <div className="paylabs-key-format-row">
             <label className="paylabs-modal-label">
-              RSA Private Key ({selectedEnv})
+              RSA Private Key ({selectedEnv}) <span className="paylabs-required-star" aria-label="wajib diisi">*</span>
             </label>
             {(() => {
               const trimmed = privateKey.trim();
