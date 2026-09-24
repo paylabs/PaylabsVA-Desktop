@@ -70,9 +70,9 @@ describe('Tour Steps Definition', () => {
     expect(TOUR_COMPLETED_STORAGE_KEY).toBe('antigravity_tour_completed');
   });
 
-  it('should_have_thirteen_steps_covering_all_ui_areas', () => {
-    // Assert: 13 langkah mencakup Generator VA dan Riwayat VA
-    expect(TOUR_STEPS).toHaveLength(13);
+  it('should_have_fourteen_steps_covering_all_ui_areas', () => {
+    // Assert: 14 langkah mencakup Generator VA, Static VA, dan Riwayat VA
+    expect(TOUR_STEPS).toHaveLength(14);
   });
 
   it('should_not_contain_informal_emojis_in_step_titles', () => {
@@ -94,15 +94,20 @@ describe('Tour Steps Definition', () => {
     expect(tabs).toContain('va-history');
   });
 
-  it('should_have_advanceOnClick_on_step_9_for_seamless_tab_transition', () => {
-    // Step 9 adalah tombol Riwayat VA di sidebar
-    expect(TOUR_STEPS[8].element).toBe('#sidebar-nav-va-history');
-    expect(TOUR_STEPS[8].advanceOnClick).toBe(true);
+  it('should_have_static_va_nav_step_defined', () => {
+    expect(TOUR_STEPS[5].element).toBe('#sidebar-nav-static-va');
+    expect(TOUR_STEPS[5].popover?.title).toContain('Static VA');
+  });
+
+  it('should_have_advanceOnClick_on_history_nav_step_for_seamless_tab_transition', () => {
+    // Step 10 adalah tombol Riwayat VA di sidebar
+    expect(TOUR_STEPS[9].element).toBe('#sidebar-nav-va-history');
+    expect(TOUR_STEPS[9].advanceOnClick).toBe(true);
   });
 
   it('should_have_correct_target_ids_for_history_steps', () => {
-    expect(TOUR_STEPS[9].element).toBe('#va-history-stats');
-    expect(TOUR_STEPS[10].element).toBe('#va-history-toolbar');
-    expect(TOUR_STEPS[11].element).toBe('#va-history-table');
+    expect(TOUR_STEPS[10].element).toBe('#va-history-stats');
+    expect(TOUR_STEPS[11].element).toBe('#va-history-toolbar');
+    expect(TOUR_STEPS[12].element).toBe('#va-history-table');
   });
 });

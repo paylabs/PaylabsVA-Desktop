@@ -44,7 +44,7 @@ export const TOUR_STEPS: CustomDriveStep[] = [
     popover: {
       title: 'Kredensial API Paylabs',
       description:
-        'Status dan indikator lingkungan aktif (SIT/PROD). Klik untuk membuka panel konfigurasi Client ID, Secret Key, dan Merchant ID sebelum transaksi.',
+        'Status dan indikator lingkungan aktif (SIT Sandbox / Production). Klik untuk mengonfigurasi Partner ID dan RSA Private Key PKCS#1 / PKCS#8 sebelum transaksi.',
       side: 'bottom',
       align: 'center',
     },
@@ -77,7 +77,18 @@ export const TOUR_STEPS: CustomDriveStep[] = [
     popover: {
       title: 'Navigasi Menu Utama',
       description:
-        'Sidebar untuk berpindah menu kerja: Generate VA untuk alokasi baru, Riwayat VA untuk daftar transaksi, dan Panduan untuk dokumentasi.',
+        'Sidebar untuk berpindah menu kerja: Dynamic VA (tagihan spesifik), Static VA (open payment), Riwayat VA untuk audit, dan Panduan operasional.',
+      side: 'right',
+      align: 'start',
+    },
+  },
+  {
+    element: '#sidebar-nav-static-va',
+    targetTab: 'va-generator',
+    popover: {
+      title: 'Fitur Baru: Static VA',
+      description:
+        'Menu Static Virtual Account dengan skema Open Payment (Rp 0.00 / Bebas Nominal) untuk channel BNI, BCA, dan Mandiri tanpa batasan tagihan.',
       side: 'right',
       align: 'start',
     },
@@ -88,7 +99,7 @@ export const TOUR_STEPS: CustomDriveStep[] = [
     popover: {
       title: 'Pilihan Channel Bank',
       description:
-        'Pilih bank penyedia Virtual Account dari daftar mitra Paylabs. Pemilihan bank wajib dilakukan sebelum proses generate dapat dieksekusi.',
+        'Pilih channel bank Virtual Account mitra Paylabs dengan BNI (009) sebagai default, serta opsi BCA (014) dan Mandiri (008). Kolom wajib ditandai bintang (*).',
       side: 'bottom',
       align: 'start',
     },
@@ -97,9 +108,9 @@ export const TOUR_STEPS: CustomDriveStep[] = [
     element: '#va-amount-input',
     targetTab: 'va-generator',
     popover: {
-      title: 'Nominal Tagihan',
+      title: 'Nominal Tagihan (Dynamic VA)',
       description:
-        'Tentukan nilai pembayaran dalam Rupiah. Anda dapat mengetik manual atau memilih tombol nominal instan (50rb, 100rb, 250rb, dst.).',
+        'Tentukan nilai pembayaran tertutup dalam Rupiah untuk Dynamic VA. Pada Static VA, nominal otomatis bernilai 0.00 (Open Payment bebas nominal).',
       side: 'bottom',
       align: 'start',
     },
