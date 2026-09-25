@@ -15,32 +15,33 @@ import {
 import { isTauriEnvironment } from './windowService';
 
 export const DYNAMIC_CHANNELS: readonly Channel[] = [
-  { id: 'MultipleBNIVA', code: '009', name: 'BNI' },
   { id: 'MultipleBCAVA', code: '014', name: 'BCA' },
+  { id: 'MultipleBNIVA', code: '009', name: 'BNI' },
+  { id: 'MultipleBRIVA', code: '002', name: 'BRI' },
+  { id: 'MultipleBSIVA', code: '451', name: 'BSI' },
+  { id: 'MultipleCIMBVA', code: '022', name: 'CIMB Niaga' },
+  { id: 'MultipleDanamonVA', code: '011', name: 'Danamon' },
+  { id: 'MultipleINAVA', code: '513', name: 'Bank INA' },
+  { id: 'MultiplePermataVA', code: '013', name: 'Permata' },
   { id: 'MultipleMandiriVA', code: '008', name: 'Mandiri' },
+  { id: 'MultipleMaybankVA', code: '016', name: 'Maybank' },
+  { id: 'MultipleMuamalatVA', code: '147', name: 'Muamalat' },
+  { id: 'MultipleSinarmasVA', code: '153', name: 'Sinarmas' },
+  { id: 'MultipleBNCVA', code: '490', name: 'BNC' },
+  { id: 'MultipleNobuVA', code: '503', name: 'Nobu' },
 ];
 
 export const STATIC_CHANNELS: readonly Channel[] = [
   { id: 'StaticBNIVA', code: '009', name: 'BNI' },
+  { id: 'StaticBNCVA', code: '490', name: 'BNC' },
+  { id: 'StaticNobuVA', code: '503', name: 'Nobu' },
+  { id: 'StaticINAVA', code: '513', name: 'Bank INA' },
   { id: 'StaticBCAVA', code: '014', name: 'BCA' },
-  { id: 'StaticMandiriVA', code: '008', name: 'Mandiri' },
 ];
 
 const MOCK_CHANNELS: Channel[] = [
-  { id: 'BCA', code: '014', name: 'BCA' },
-  { id: 'BNI', code: '009', name: 'BNI' },
-  { id: 'BRI', code: '002', name: 'BRI' },
-  { id: 'MANDIRI', code: '008', name: 'Mandiri' },
-  { id: 'PERMATA', code: '013', name: 'Permata' },
-  { id: 'DANAMON', code: '011', name: 'Danamon' },
-  { id: 'CIMB', code: '022', name: 'CIMB' },
-  { id: 'BSI', code: '451', name: 'BSI' },
-  { id: 'MultipleBNIVA', code: '009', name: 'BNI (Dynamic VA)' },
-  { id: 'MultipleBCAVA', code: '014', name: 'BCA (Dynamic VA)' },
-  { id: 'MultipleMandiriVA', code: '008', name: 'Mandiri (Dynamic VA)' },
-  { id: 'StaticBNIVA', code: '009', name: 'BNI (Static VA)' },
-  { id: 'StaticBCAVA', code: '014', name: 'BCA (Static VA)' },
-  { id: 'StaticMandiriVA', code: '008', name: 'Mandiri (Static VA)' },
+  ...DYNAMIC_CHANNELS,
+  ...STATIC_CHANNELS,
 ];
 
 /**

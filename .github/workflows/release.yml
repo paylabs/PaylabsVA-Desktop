@@ -56,13 +56,31 @@ jobs:
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
           tagName: v__VERSION__
           releaseName: 'Paylabs VA v__VERSION__'
           releaseBody: |
-            ### 🚀 Paylabs VA Desktop (Multiplatform Release)
+            ### 🚀 Paylabs VA Desktop v__VERSION__ (Multiplatform Release)
             
             Rilis resmi aplikasi desktop **Paylabs SNAP Virtual Account v4.8.1**:
+            
+            #### ✨ Fitur Baru & Peningkatan (v__VERSION__):
+            - **🔄 In-App Auto-Update (GitHub Releases)**:
+              - Pemeriksaan otomatis versi baru saat aplikasi dibuka (*silent check*).
+              - Notifikasi Apple HIG Banner di pojok kanan atas dengan *progress bar* unduhan real-time.
+              - Verifikasi keamanan tanda tangan kriptografis Ed25519 (anti-tampering).
+              - Tombol manual *"Periksa Pembaruan"* di modal Pengaturan.
+            - **🏦 Dukungan 14 Bank Channel (Dynamic VA)**:
+              - BCA, BNI, BRI, BSI, CIMB Niaga, Danamon, Bank INA, Permata, Mandiri, Maybank, Muamalat, Sinarmas, BNC (*Bank Neo Commerce*), dan Nobu.
+            - **🔒 Eksklusif 5 Bank Channel (Static VA)**:
+              - BNI (`StaticBNIVA`), BNC (`StaticBNCVA`), Nobu (`StaticNobuVA`), Bank INA (`StaticINAVA`), dan BCA (`StaticBCAVA`).
+            - **🛠️ Penyempurnaan & Stabilitas**:
+              - Normalisasi pintar nama bank untuk Bank INA, BNC, dan Nobu.
+              - Penanganan koneksi jaringan & error handling yang lebih andal.
+            
+            #### 📦 Paket Installer:
             - **macOS (Universal Binary)**: Installer `.dmg` untuk Mac Apple Silicon (M1-M4) & Intel.
             - **Windows (x64)**: Installer `.exe` (NSIS setup) & `.msi` (Windows Installer).
             

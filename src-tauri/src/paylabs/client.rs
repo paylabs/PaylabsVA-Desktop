@@ -19,20 +19,28 @@ const BASE36: &[u8] = b"0123456789abcdefghijklmnopqrstuvwxyz";
 /// Daftar Bank Channel Virtual Account resmi yang didukung Paylabs SNAP API.
 pub fn get_available_channels() -> Vec<Channel> {
     vec![
+        // 14 Multiple Channels (Dynamic VA)
         Channel { id: "MultipleBCAVA".into(), code: "014".into(), name: "BCA".into() },
         Channel { id: "MultipleBNIVA".into(), code: "009".into(), name: "BNI".into() },
         Channel { id: "MultipleBRIVA".into(), code: "002".into(), name: "BRI".into() },
-        Channel { id: "MultipleMandiriVA".into(), code: "008".into(), name: "Mandiri".into() },
-        Channel { id: "MultiplePermataVA".into(), code: "013".into(), name: "Permata".into() },
-        Channel { id: "MultipleDanamonVA".into(), code: "011".into(), name: "Danamon".into() },
-        Channel { id: "MultipleCIMBVA".into(), code: "022".into(), name: "CIMB".into() },
         Channel { id: "MultipleBSIVA".into(), code: "451".into(), name: "BSI".into() },
-        Channel { id: "MultipleSinarmasVA".into(), code: "153".into(), name: "Sinarmas".into() },
-        Channel { id: "MultipleMuamalatVA".into(), code: "147".into(), name: "Muamalat".into() },
+        Channel { id: "MultipleCIMBVA".into(), code: "022".into(), name: "CIMB Niaga".into() },
+        Channel { id: "MultipleDanamonVA".into(), code: "011".into(), name: "Danamon".into() },
+        Channel { id: "MultipleINAVA".into(), code: "513".into(), name: "Bank INA".into() },
+        Channel { id: "MultiplePermataVA".into(), code: "013".into(), name: "Permata".into() },
+        Channel { id: "MultipleMandiriVA".into(), code: "008".into(), name: "Mandiri".into() },
         Channel { id: "MultipleMaybankVA".into(), code: "016".into(), name: "Maybank".into() },
+        Channel { id: "MultipleMuamalatVA".into(), code: "147".into(), name: "Muamalat".into() },
+        Channel { id: "MultipleSinarmasVA".into(), code: "153".into(), name: "Sinarmas".into() },
+        Channel { id: "MultipleBNCVA".into(), code: "490".into(), name: "BNC".into() },
+        Channel { id: "MultipleNobuVA".into(), code: "503".into(), name: "Nobu".into() },
+
+        // 5 Static Channels Resmi (Static VA)
         Channel { id: "StaticBNIVA".into(), code: "009".into(), name: "BNI (Static)".into() },
+        Channel { id: "StaticBNCVA".into(), code: "490".into(), name: "BNC (Static)".into() },
+        Channel { id: "StaticNobuVA".into(), code: "503".into(), name: "Nobu (Static)".into() },
+        Channel { id: "StaticINAVA".into(), code: "513".into(), name: "Bank INA (Static)".into() },
         Channel { id: "StaticBCAVA".into(), code: "014".into(), name: "BCA (Static)".into() },
-        Channel { id: "StaticMandiriVA".into(), code: "008".into(), name: "Mandiri (Static)".into() },
     ]
 }
 
@@ -46,14 +54,17 @@ pub fn normalize_payment_type(channel: &str) -> String {
         "BCA" => "MultipleBCAVA".to_string(),
         "BNI" => "MultipleBNIVA".to_string(),
         "BRI" => "MultipleBRIVA".to_string(),
-        "MANDIRI" => "MultipleMandiriVA".to_string(),
-        "PERMATA" => "MultiplePermataVA".to_string(),
-        "DANAMON" => "MultipleDanamonVA".to_string(),
-        "CIMB" => "MultipleCIMBVA".to_string(),
         "BSI" => "MultipleBSIVA".to_string(),
-        "SINARMAS" => "MultipleSinarmasVA".to_string(),
-        "MUAMALAT" => "MultipleMuamalatVA".to_string(),
+        "CIMB" | "CIMB NIAGA" => "MultipleCIMBVA".to_string(),
+        "DANAMON" => "MultipleDanamonVA".to_string(),
+        "INA" | "BANK INA" => "MultipleINAVA".to_string(),
+        "PERMATA" => "MultiplePermataVA".to_string(),
+        "MANDIRI" => "MultipleMandiriVA".to_string(),
         "MAYBANK" => "MultipleMaybankVA".to_string(),
+        "MUAMALAT" => "MultipleMuamalatVA".to_string(),
+        "SINARMAS" => "MultipleSinarmasVA".to_string(),
+        "BNC" | "NEO" | "NEO COMMERCE" => "MultipleBNCVA".to_string(),
+        "NOBU" | "BANK NOBU" => "MultipleNobuVA".to_string(),
         other => format!("Multiple{}VA", other),
     }
 }

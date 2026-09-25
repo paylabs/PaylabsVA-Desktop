@@ -101,7 +101,7 @@ const ManualHeader: React.FC = () => {
         <div className="manual-header-badge-row">
           <span className="manual-badge badge-accent">Standar SNAP BI</span>
           <span className="manual-badge">Tauri v2 Native</span>
-          <span className="manual-badge">Versi 0.1.1</span>
+          <span className="manual-badge">Versi 0.1.2</span>
         </div>
         <h1 className="manual-page-title">
           <BookOpen size={22} style={{ color: 'var(--accent-primary)' }} />

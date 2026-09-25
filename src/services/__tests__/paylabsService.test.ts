@@ -33,15 +33,25 @@ describe('paylabsService', () => {
   });
 
   describe('getPaylabsChannels', () => {
-    it('should_return_bank_channel_list_with_bca_and_bri', async () => {
+    it('should_return_bank_channel_list_with_all_14_channels', async () => {
       // Arrange & Act
       const channels = await getPaylabsChannels();
 
       // Assert
-      expect(channels.length).toBeGreaterThan(0);
-      const bca = channels.find((c) => c.id === 'BCA');
-      expect(bca).toBeDefined();
-      expect(bca?.name).toContain('BCA');
+      expect(channels.length).toBe(19); // 14 dynamic + 5 static (BNI, BNC, Nobu, INA, BCA)
+      const bcaMultiple = channels.find((c) => c.id === 'MultipleBCAVA');
+      expect(bcaMultiple).toBeDefined();
+      expect(bcaMultiple?.name).toBe('BCA');
+
+      const bcaStatic = channels.find((c) => c.id === 'StaticBCAVA');
+      expect(bcaStatic).toBeDefined();
+
+      const inaMultiple = channels.find((c) => c.id === 'MultipleINAVA');
+      expect(inaMultiple).toBeDefined();
+      expect(inaMultiple?.name).toBe('Bank INA');
+
+      const nobuStatic = channels.find((c) => c.id === 'StaticNobuVA');
+      expect(nobuStatic).toBeDefined();
     });
   });
 

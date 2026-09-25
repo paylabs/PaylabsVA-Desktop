@@ -70,6 +70,30 @@ describe('formatBankName', () => {
     expect(result).toBe('BCA');
   });
 
+  it('should_return_bank_ina_when_name_contains_ina', () => {
+    // Arrange & Act
+    const result = formatBankName('Bank INA Perdana');
+
+    // Assert
+    expect(result).toBe('Bank INA');
+  });
+
+  it('should_return_bnc_when_name_contains_bnc_or_neo', () => {
+    // Arrange & Act
+    const result = formatBankName('Bank Neo Commerce');
+
+    // Assert
+    expect(result).toBe('BNC');
+  });
+
+  it('should_return_nobu_when_name_contains_nobu', () => {
+    // Arrange & Act
+    const result = formatBankName('Nationalnobu');
+
+    // Assert
+    expect(result).toBe('Nobu');
+  });
+
   it('should_return_dash_when_both_inputs_are_empty', () => {
     // Arrange & Act
     const result = formatBankName();

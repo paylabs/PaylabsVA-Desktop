@@ -70,9 +70,9 @@ describe('Tour Steps Definition', () => {
     expect(TOUR_COMPLETED_STORAGE_KEY).toBe('antigravity_tour_completed');
   });
 
-  it('should_have_fourteen_steps_covering_all_ui_areas', () => {
-    // Assert: 14 langkah mencakup Generator VA, Static VA, dan Riwayat VA
-    expect(TOUR_STEPS).toHaveLength(14);
+  it('should_have_fifteen_steps_covering_all_ui_areas', () => {
+    // Assert: 15 langkah mencakup Generator VA, Static VA, Riwayat VA, dan Auto-Update
+    expect(TOUR_STEPS).toHaveLength(15);
   });
 
   it('should_not_contain_informal_emojis_in_step_titles', () => {
@@ -105,9 +105,12 @@ describe('Tour Steps Definition', () => {
     expect(TOUR_STEPS[9].advanceOnClick).toBe(true);
   });
 
-  it('should_have_correct_target_ids_for_history_steps', () => {
+  it('should_have_correct_target_ids_for_history_and_updater_steps', () => {
     expect(TOUR_STEPS[10].element).toBe('#va-history-stats');
     expect(TOUR_STEPS[11].element).toBe('#va-history-toolbar');
     expect(TOUR_STEPS[12].element).toBe('#va-history-table');
+    expect(TOUR_STEPS[13].element).toBe('.status-bar-container');
+    expect(TOUR_STEPS[14].element).toBe('#status-bar-updater');
+    expect(TOUR_STEPS[14].popover?.title).toContain('Pembaruan Otomatis');
   });
 });

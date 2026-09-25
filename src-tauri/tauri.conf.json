@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Paylabs VA",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "identifier": "id.co.paylabs.va",
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -29,6 +29,7 @@
   },
   "bundle": {
     "active": true,
+    "createUpdaterArtifacts": true,
     "targets": "all",
     "icon": [
       "icons/32x32.png",
@@ -37,5 +38,13 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEJFRUIzQUQ2NzAyRDlEMzMKUldRem5TMXcxanJydmxGalRpQ3MrOVkzZDhkakVoaVN4bThFODJZUEhCK0RiazlYRG1LR29mRmgK",
+      "endpoints": [
+        "https://github.com/paylabs/PaylabsVA-Desktop/releases/latest/download/latest.json"
+      ]
+    }
   }
 }

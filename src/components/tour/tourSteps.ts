@@ -182,4 +182,15 @@ export const TOUR_STEPS: CustomDriveStep[] = [
       align: 'center',
     },
   },
+  {
+    element: '#status-bar-updater',
+    targetTab: 'va-history',
+    popover: {
+      title: 'Pembaruan Otomatis (Auto-Update)',
+      description:
+        'Indikator versi Paylabs VA Desktop (v0.1.2) dan pembaruan rilis. Aplikasi otomatis memeriksa rilis terbaru di latar belakang saat pertama kali dibuka, dan Anda dapat mengkliknya kapan pun untuk mengecek rilis baru.',
+      side: 'top',
+      align: 'end',
+    },
+  },
 ];

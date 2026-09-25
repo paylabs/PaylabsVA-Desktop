@@ -15,6 +15,7 @@ import {
 
 import { usePaylabs } from '../../hooks/usePaylabs';
 import { CreateVaFormInput } from '../../types/paylabs';
+import { DYNAMIC_CHANNELS, STATIC_CHANNELS } from '../../services/paylabsService';
 import { CustomSelect } from '../ui/CustomSelect';
 import { Tooltip } from '../ui/Tooltip';
 import { VaInspectorDrawer } from './VaInspectorDrawer';
@@ -525,18 +526,12 @@ export const VaGeneratorView: React.FC<VaGeneratorViewProps> = ({
     setTimeout(() => setCopiedVa(false), 2000);
   };
 
-  // Pilihan channel bank yang didukung: BNI (default), BCA, dan Mandiri
-  const channelOptions = isStatic
-    ? [
-        { value: 'StaticBNIVA', label: 'BNI (009)' },
-        { value: 'StaticBCAVA', label: 'BCA (014)' },
-        { value: 'StaticMandiriVA', label: 'Mandiri (008)' },
-      ]
-    : [
-        { value: 'MultipleBNIVA', label: 'BNI (009)' },
-        { value: 'MultipleBCAVA', label: 'BCA (014)' },
-        { value: 'MultipleMandiriVA', label: 'Mandiri (008)' },
-      ];
+  // Pilihan channel bank resmi yang didukung Paylabs SNAP (14 Bank)
+  const availableList = isStatic ? STATIC_CHANNELS : DYNAMIC_CHANNELS;
+  const channelOptions = availableList.map((ch) => ({
+    value: ch.id,
+    label: `${ch.name} (${ch.code})`,
+  }));
 
   const createdVa = lastExchange?.success ? lastExchange.parsed?.virtualAccountData : null;
 
