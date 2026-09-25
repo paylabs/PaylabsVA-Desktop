@@ -20,6 +20,7 @@ import { AppTour } from '../tour/AppTour';
 import { ToastContainer } from '../ui/Toast';
 import { useAppUpdater } from '../../hooks/useAppUpdater';
 import { UpdateNotificationBanner } from '../updater/UpdateNotificationBanner';
+import { ReleaseNotesModal } from '../updater/ReleaseNotesModal';
 
 /**
  * Shell utama aplikasi desktop Tauri (macOS Native Profile)
@@ -34,6 +35,7 @@ export const AppShell: React.FC = () => {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isTourRunning, setIsTourRunning] = useState(false);
+  const [isReleaseNotesOpen, setIsReleaseNotesOpen] = useState(false);
   const [selectedHistoryRecord, setSelectedHistoryRecord] = useState<any>(null);
   const { toasts, showToast, dismissToast } = useToast();
   const updater = useAppUpdater();
@@ -159,7 +161,7 @@ export const AppShell: React.FC = () => {
             if (updater.status === 'ready') {
               updater.applyUpdateAndRelaunch();
             } else if (updater.status === 'available') {
-              updater.startDownloadAndInstall();
+              setIsReleaseNotesOpen(true);
             } else {
               updater.checkForUpdates(false);
             }
@@ -185,7 +187,7 @@ export const AppShell: React.FC = () => {
             <>
               <ArrowDownCircle size={11} style={{ color: 'var(--accent-primary)' }} />
               <strong style={{ color: 'var(--accent-primary)' }}>
-                Update v{updater.updateInfo?.version || 'Baru'} Tersedia (Klik Pasang)
+                Update v{updater.updateInfo?.version || 'Baru'} Tersedia (Lihat Detail)
               </strong>
             </>
           ) : updater.status === 'downloading' ? (
@@ -201,7 +203,7 @@ export const AppShell: React.FC = () => {
           ) : (
             <>
               <CheckCircle2 size={11} style={{ color: '#10b981' }} />
-              <span>Paylabs VA Desktop (v0.1.3)</span>
+              <span>Paylabs VA Desktop (v0.1.4)</span>
             </>
           )}
         </div>
@@ -220,6 +222,15 @@ export const AppShell: React.FC = () => {
         onDismiss={updater.dismissBanner}
         onStartDownload={updater.startDownloadAndInstall}
         onRelaunch={updater.applyUpdateAndRelaunch}
+        onViewReleaseNotes={() => setIsReleaseNotesOpen(true)}
+      />
+
+      {/* Modal Dialog Catatan Rilis Pembaruan */}
+      <ReleaseNotesModal
+        isOpen={isReleaseNotesOpen}
+        onClose={() => setIsReleaseNotesOpen(false)}
+        updateInfo={updater.updateInfo}
+        onStartDownload={updater.startDownloadAndInstall}
       />
 
       {/* Modal Pengaturan Kredensial Global */}

@@ -31,24 +31,31 @@ describe('UpdateNotificationBanner Component', () => {
   it('should_render_available_update_and_trigger_download_on_click', () => {
     // Arrange
     const handleDownload = vi.fn();
+    const handleViewNotes = vi.fn();
     render(
       <UpdateNotificationBanner
         status="available"
-        updateInfo={{ version: '0.1.2', notes: 'Patch perbaikan' }}
+        updateInfo={{ version: '0.1.3', notes: '### Fitur Baru\n- Peningkatan stabilitas' }}
         progress={0}
         errorMessage={null}
         isVisible={true}
         onDismiss={vi.fn()}
         onStartDownload={handleDownload}
         onRelaunch={vi.fn()}
+        onViewReleaseNotes={handleViewNotes}
       />
     );
 
     // Assert
-    expect(screen.getByText('Versi 0.1.2 Tersedia')).toBeDefined();
-    expect(screen.getByText('Patch perbaikan')).toBeDefined();
+    expect(screen.getByText('Versi 0.1.3 Tersedia')).toBeDefined();
+    expect(screen.getByText(/Tersedia pembaruan rilis baru dengan fitur dan peningkatan stabilitas/i)).toBeDefined();
 
-    // Act
+    // Act: Klik Catatan Rilis
+    const notesBtn = screen.getByRole('button', { name: /Catatan Rilis/i });
+    fireEvent.click(notesBtn);
+    expect(handleViewNotes).toHaveBeenCalledTimes(1);
+
+    // Act: Klik Unduh & Pasang
     const downloadBtn = screen.getByRole('button', { name: /Unduh & Pasang/i });
     fireEvent.click(downloadBtn);
 

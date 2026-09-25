@@ -17,6 +17,7 @@ export interface UpdateNotificationBannerProps {
   onDismiss: () => void;
   onStartDownload: () => void;
   onRelaunch: () => void;
+  onViewReleaseNotes?: () => void;
 }
 
 /**
@@ -31,6 +32,7 @@ export const UpdateNotificationBanner: React.FC<UpdateNotificationBannerProps> =
   onDismiss,
   onStartDownload,
   onRelaunch,
+  onViewReleaseNotes,
 }) => {
   if (!isVisible || status === 'idle' || status === 'up-to-date') {
     return null;
@@ -71,14 +73,14 @@ export const UpdateNotificationBanner: React.FC<UpdateNotificationBannerProps> =
             {status === 'available'
               ? `Versi ${updateInfo?.version || 'Baru'} Tersedia`
               : status === 'downloading'
-                ? `Mengunduh Pembaruan...`
+                ? 'Mengunduh Pembaruan...'
                 : status === 'ready'
-                  ? `Pembaruan Telah Siap`
+                  ? 'Pembaruan Telah Siap'
                   : 'Gagal Memperbarui'}
           </div>
 
           <div className="macos-toast-message">
-            {status === 'available' && (updateInfo?.notes || 'Peningkatan stabilitas dan perbaikan bug.')}
+            {status === 'available' && 'Tersedia pembaruan rilis baru dengan fitur dan peningkatan stabilitas.'}
             {status === 'downloading' && 'Mohon tunggu sementara paket installer diunduh...'}
             {status === 'ready' && 'Mulai ulang aplikasi sekarang untuk menerapkan versi baru.'}
             {status === 'error' && (errorMessage || 'Terjadi kesalahan saat memeriksa rilis.')}
@@ -108,16 +110,27 @@ export const UpdateNotificationBanner: React.FC<UpdateNotificationBannerProps> =
           )}
 
           {/* Action Buttons */}
-          <div style={{ display: 'flex', gap: 6, marginTop: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
             {status === 'available' && (
-              <button
-                type="button"
-                className="btn btn-primary"
-                style={{ height: 26, fontSize: 11, padding: '0 10px', borderRadius: 6 }}
-                onClick={onStartDownload}
-              >
-                Unduh & Pasang
-              </button>
+              <>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  style={{ height: 26, fontSize: 11, padding: '0 10px', borderRadius: 6 }}
+                  onClick={onStartDownload}
+                >
+                  Unduh &amp; Pasang
+                </button>
+                {onViewReleaseNotes && (
+                  <button
+                    type="button"
+                    className="update-banner-link-btn"
+                    onClick={onViewReleaseNotes}
+                  >
+                    Catatan Rilis
+                  </button>
+                )}
+              </>
             )}
 
             {status === 'ready' && (

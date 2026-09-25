@@ -4,6 +4,21 @@ Seluruh perubahan dan catatan rilis pada proyek **Paylabs VA Desktop** didokumen
 
 ---
 
+## [0.1.4] - 2026-09-25
+
+### ✨ Fitur Baru & Peningkatan (Added & Improved)
+- **Desain Ulang UI Notifikasi Pembaruan (Apple HIG)**:
+  - Banner notifikasi updater dirancang ulang menjadi ringkas (~85px) tanpa tumpukan teks mentah yang menutupi antarmuka aplikasi.
+  - Penambahan tombol sekunder *"Catatan Rilis"* pada banner untuk memicu dialog detail.
+- **Komponen Parser & Renderer Markdown Native (`MarkdownRenderer`)**:
+  - Pemformatan aman tanpa dependensi eksternal untuk heading, bullet lists, teks tebal, inline code, dan blockquote/code block.
+- **Modal Dialog Catatan Rilis (`ReleaseNotesModal`)**:
+  - Dialog terpusat yang menyajikan catatan rilis lengkap dengan rapi, berurutan, dilengkapi badge versi & tanggal rilis lokal.
+- **Penyempurnaan Interaksi Status Bar**:
+  - Tombol status bar footer kini langsung membuka modal catatan rilis saat versi baru terdeteksi.
+
+---
+
 ## [0.1.3] - 2026-09-25
 
 ### ✨ Fitur Baru (Added)
