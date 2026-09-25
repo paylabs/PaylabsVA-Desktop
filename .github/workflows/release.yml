@@ -61,6 +61,7 @@ jobs:
         with:
           tagName: v__VERSION__
           releaseName: 'Paylabs VA v__VERSION__'
+          tauriScript: npx tauri
           releaseBody: |
             ### 🚀 Paylabs VA Desktop v__VERSION__ (Multiplatform Release)
             

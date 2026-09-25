@@ -40,3 +40,6 @@ src-tauri/gen/schemas/
 *.der
 history.json
 config.json
+
+# Bun lockfile (CI menggunakan npm, bun.lock lokal saja)
+bun.lock
