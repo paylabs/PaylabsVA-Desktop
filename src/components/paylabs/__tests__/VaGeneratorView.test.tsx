@@ -103,6 +103,18 @@ describe('VaGeneratorView Component Validation', () => {
     expect(screen.getByText('Mandiri (008)')).toBeDefined();
   });
 
+  it('should_provide_static_mandiri_va_option_in_static_mode', () => {
+    // Arrange & Act
+    render(<VaGeneratorView mode="static" onShowToast={onShowToastMock} />);
+
+    // Act: Buka dropdown select
+    const triggerBtn = screen.getByRole('button', { name: /Dropdown selector/i });
+    fireEvent.click(triggerBtn);
+
+    // Assert: Opsi Mandiri (008) tersedia di popover Static VA
+    expect(screen.getByText('Mandiri (008)')).toBeDefined();
+  });
+
   it('should_submit_with_zero_amount_when_mode_is_static', async () => {
     // Arrange
     submitCreateVaMock.mockResolvedValueOnce({

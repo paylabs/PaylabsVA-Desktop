@@ -4,6 +4,16 @@ Seluruh perubahan dan catatan rilis pada proyek **Paylabs VA Desktop** didokumen
 
 ---
 
+## [0.1.3] - 2026-09-25
+
+### ✨ Fitur Baru (Added)
+- **Dukungan Static Bank Mandiri Virtual Account (`StaticMandiriVA`)**:
+  - Penambahan channel resmi Bank Mandiri (`008`) untuk skema Static VA (*Open Payment* / transfer bebas nominal tanpa batasan tagihan tetap).
+  - Normalisasi otomatis tipe pembayaran SNAP untuk variasi channel `StaticMandiriVA`.
+  - Integrasi di UI formulir Static Virtual Account dan sinkronisasi daftar bank channel lintas backend Tauri v2 dan frontend React.
+
+---
+
 ## [0.1.2] - 2026-09-25
 
 ### ✨ Fitur Baru (Added)

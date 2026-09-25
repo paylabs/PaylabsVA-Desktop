@@ -201,7 +201,7 @@ export const AppShell: React.FC = () => {
           ) : (
             <>
               <CheckCircle2 size={11} style={{ color: '#10b981' }} />
-              <span>Paylabs VA Desktop (v0.1.2)</span>
+              <span>Paylabs VA Desktop (v0.1.3)</span>
             </>
           )}
         </div>

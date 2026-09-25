@@ -38,13 +38,18 @@ describe('paylabsService', () => {
       const channels = await getPaylabsChannels();
 
       // Assert
-      expect(channels.length).toBe(19); // 14 dynamic + 5 static (BNI, BNC, Nobu, INA, BCA)
+      expect(channels.length).toBe(20); // 14 dynamic + 6 static (BNI, BNC, Nobu, INA, BCA, Mandiri)
       const bcaMultiple = channels.find((c) => c.id === 'MultipleBCAVA');
       expect(bcaMultiple).toBeDefined();
       expect(bcaMultiple?.name).toBe('BCA');
 
       const bcaStatic = channels.find((c) => c.id === 'StaticBCAVA');
       expect(bcaStatic).toBeDefined();
+
+      const mandiriStatic = channels.find((c) => c.id === 'StaticMandiriVA');
+      expect(mandiriStatic).toBeDefined();
+      expect(mandiriStatic?.name).toBe('Mandiri');
+      expect(mandiriStatic?.code).toBe('008');
 
       const inaMultiple = channels.find((c) => c.id === 'MultipleINAVA');
       expect(inaMultiple).toBeDefined();

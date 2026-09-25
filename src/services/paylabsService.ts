@@ -37,6 +37,7 @@ export const STATIC_CHANNELS: readonly Channel[] = [
   { id: 'StaticNobuVA', code: '503', name: 'Nobu' },
   { id: 'StaticINAVA', code: '513', name: 'Bank INA' },
   { id: 'StaticBCAVA', code: '014', name: 'BCA' },
+  { id: 'StaticMandiriVA', code: '008', name: 'Mandiri' },
 ];
 
 const MOCK_CHANNELS: Channel[] = [

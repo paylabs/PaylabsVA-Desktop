@@ -35,16 +35,17 @@ pub fn get_available_channels() -> Vec<Channel> {
         Channel { id: "MultipleBNCVA".into(), code: "490".into(), name: "BNC".into() },
         Channel { id: "MultipleNobuVA".into(), code: "503".into(), name: "Nobu".into() },
 
-        // 5 Static Channels Resmi (Static VA)
+        // 6 Static Channels Resmi (Static VA)
         Channel { id: "StaticBNIVA".into(), code: "009".into(), name: "BNI (Static)".into() },
         Channel { id: "StaticBNCVA".into(), code: "490".into(), name: "BNC (Static)".into() },
         Channel { id: "StaticNobuVA".into(), code: "503".into(), name: "Nobu (Static)".into() },
         Channel { id: "StaticINAVA".into(), code: "513".into(), name: "Bank INA (Static)".into() },
         Channel { id: "StaticBCAVA".into(), code: "014".into(), name: "BCA (Static)".into() },
+        Channel { id: "StaticMandiriVA".into(), code: "008".into(), name: "Mandiri (Static)".into() },
     ]
 }
 
-/// Normalisasi paymentType SNAP Paylabs (misal "BCA" -> "MultipleBCAVA", "StaticBNIVA" -> "StaticBNIVA").
+/// Normalisasi paymentType SNAP Paylabs (misal "BCA" -> "MultipleBCAVA", "StaticMandiriVA" -> "StaticMandiriVA").
 pub fn normalize_payment_type(channel: &str) -> String {
     let trimmed = channel.trim();
     if (trimmed.starts_with("Multiple") || trimmed.starts_with("Static")) && trimmed.ends_with("VA") {
@@ -65,6 +66,12 @@ pub fn normalize_payment_type(channel: &str) -> String {
         "SINARMAS" => "MultipleSinarmasVA".to_string(),
         "BNC" | "NEO" | "NEO COMMERCE" => "MultipleBNCVA".to_string(),
         "NOBU" | "BANK NOBU" => "MultipleNobuVA".to_string(),
+        "STATIC MANDIRI" | "STATICMANDIRI" => "StaticMandiriVA".to_string(),
+        "STATIC BNI" | "STATICBNI" => "StaticBNIVA".to_string(),
+        "STATIC BCA" | "STATICBCA" => "StaticBCAVA".to_string(),
+        "STATIC BNC" | "STATICBNC" => "StaticBNCVA".to_string(),
+        "STATIC NOBU" | "STATICNOBU" => "StaticNobuVA".to_string(),
+        "STATIC INA" | "STATICINA" => "StaticINAVA".to_string(),
         other => format!("Multiple{}VA", other),
     }
 }
