@@ -4,6 +4,23 @@ Seluruh perubahan dan catatan rilis pada proyek **Paylabs VA Desktop** didokumen
 
 ---
 
+## [0.1.5] - 2026-09-28
+
+### ✨ Fitur Baru (Added)
+- **Menu Baru: Multiple VA**:
+  - Channel `Multiple…VA` (misal `MultipleBCAVA`, `MultipleCIMBVA`) dipisahkan dari Dynamic VA ke menu sidebar tersendiri, lengkap dengan entri Command Palette (`⌘K`).
+  - Form sama seperti Dynamic VA: nominal tagihan (min. Rp 10.000), preset nominal, dan masa berlaku. Default channel `MultipleBNIVA`.
+- **Dukungan Bank Hana (`HanaVA`, kode 484)** pada Dynamic VA.
+
+### 🔄 Perubahan (Changed)
+- **Dynamic VA kini memakai kode channel VA biasa**: `BCAVA`, `BNIVA`, `BRIVA`, `BSIVA`, `CIMBVA`, `DanamonVA`, `INAVA`, `PermataVA`, `MandiriVA`, `MaybankVA`, `MuamalatVA`, `SinarmasVA`, `BNCVA`, `NobuVA`, `HanaVA`. Default channel `BNIVA`.
+- Nama channel Multiple pada riwayat kini diberi penanda, misal `BCA (Multiple)`, seperti Static VA.
+
+### 🐛 Perbaikan (Fixed)
+- Normalisasi `paymentType` di backend tidak lagi mengubah kode VA biasa menjadi kode yang salah (misal `BCAVA` → `MultipleBCAVAVA`).
+
+---
+
 ## [0.1.4] - 2026-09-25
 
 ### ✨ Fitur Baru & Peningkatan (Added & Improved)

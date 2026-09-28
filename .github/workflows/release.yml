@@ -65,19 +65,17 @@ jobs:
             
             Rilis resmi aplikasi desktop **Paylabs SNAP Virtual Account v4.8.1**:
             
-            #### ✨ Fitur Baru & Peningkatan (v__VERSION__):
-            - **🔄 In-App Auto-Update (GitHub Releases)**:
-              - Pemeriksaan otomatis versi baru saat aplikasi dibuka (*silent check*).
-              - Notifikasi Apple HIG Banner di pojok kanan atas dengan *progress bar* unduhan real-time.
-              - Verifikasi keamanan tanda tangan kriptografis Ed25519 (anti-tampering).
-              - Tombol manual *"Periksa Pembaruan"* di modal Pengaturan.
-            - **🏦 Dukungan 14 Bank Channel (Dynamic VA)**:
-              - BCA, BNI, BRI, BSI, CIMB Niaga, Danamon, Bank INA, Permata, Mandiri, Maybank, Muamalat, Sinarmas, BNC (*Bank Neo Commerce*), dan Nobu.
-            - **🔒 Eksklusif 5 Bank Channel (Static VA)**:
-              - BNI (`StaticBNIVA`), BNC (`StaticBNCVA`), Nobu (`StaticNobuVA`), Bank INA (`StaticINAVA`), dan BCA (`StaticBCAVA`).
-            - **🛠️ Penyempurnaan & Stabilitas**:
-              - Normalisasi pintar nama bank untuk Bank INA, BNC, dan Nobu.
-              - Penanganan koneksi jaringan & error handling yang lebih andal.
+            #### ✨ Fitur Baru & Perubahan (v__VERSION__):
+            - **🔁 Menu Baru: Multiple VA**:
+              - Channel `Multiple…VA` (misal `MultipleBCAVA`, `MultipleCIMBVA`) kini punya menu sidebar sendiri, terpisah dari Dynamic VA.
+              - Form sama seperti Dynamic VA: nominal tagihan (min. Rp 10.000), preset nominal, dan masa berlaku.
+            - **🏦 Dynamic VA Memakai Kode VA Biasa**:
+              - `BCAVA`, `BNIVA`, `BRIVA`, `BSIVA`, `CIMBVA`, `DanamonVA`, `INAVA`, `PermataVA`, `MandiriVA`, `MaybankVA`, `MuamalatVA`, `SinarmasVA`, `BNCVA`, dan `NobuVA`.
+              - Bank baru: **Hana** (`HanaVA`).
+            - **🔒 Static VA (6 Bank)**:
+              - BNI, BNC, Nobu, Bank INA, BCA, dan Mandiri.
+            - **🛠️ Perbaikan**:
+              - Kode VA biasa kini dikirim apa adanya ke SNAP (sebelumnya bisa berubah menjadi kode Multiple yang salah).
             
             #### 📦 Paket Installer:
             - **macOS (Universal Binary)**: Installer `.dmg` untuk Mac Apple Silicon (M1-M4) & Intel.
