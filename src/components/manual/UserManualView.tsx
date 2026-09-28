@@ -227,11 +227,14 @@ const SectionGenerateVa: React.FC = () => (
       Spesifikasi Pembuatan Virtual Account
     </h2>
     <p>
-      Modul generator memproses pembuatan nomor Virtual Account dengan parameter terstandarisasi SNAP dalam dua mode spesifik:
+      Modul generator memproses pembuatan nomor Virtual Account dengan parameter terstandarisasi SNAP dalam tiga mode spesifik:
     </p>
     <ul>
       <li>
-        <strong>Dynamic VA (MultipleBNIVA)</strong> — Virtual account dinamis dengan nominal tagihan yang ditentukan (minimal Rp 10.000) dan opsi masa berlaku.
+        <strong>Dynamic VA (BNIVA)</strong> — Virtual account dinamis dengan nominal tagihan yang ditentukan (minimal Rp 10.000) dan opsi masa berlaku.
+      </li>
+      <li>
+        <strong>Multiple VA (MultipleBNIVA)</strong> — Virtual account dengan kode channel Multiple (misal MultipleBCAVA, MultipleCIMBVA); parameter nominal tagihan dan masa berlaku sama seperti Dynamic VA.
       </li>
       <li>
         <strong>Static VA (StaticBNIVA)</strong> — Virtual account statis dengan nominal bebas (Open Payment / Rp 0.00) tanpa kolom nominal tetap.

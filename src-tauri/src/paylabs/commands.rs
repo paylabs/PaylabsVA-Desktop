@@ -195,7 +195,7 @@ fn build_va_request(
     }
 }
 
-/// IPC: Membuat Virtual Account multiple-use lewat SNAP API.
+/// IPC: Membuat Virtual Account (Dynamic, Multiple, atau Static) lewat SNAP API.
 #[tauri::command]
 pub async fn paylabs_create_va(form: CreateVaForm) -> Result<Exchange, String> {
     if form.name.trim().is_empty() {

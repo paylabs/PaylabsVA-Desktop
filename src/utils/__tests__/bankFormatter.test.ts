@@ -94,6 +94,14 @@ describe('formatBankName', () => {
     expect(result).toBe('Nobu');
   });
 
+  it('should_return_hana_when_channel_code_is_hanava', () => {
+    // Arrange & Act
+    const result = formatBankName('', 'HanaVA');
+
+    // Assert
+    expect(result).toBe('Hana');
+  });
+
   it('should_return_dash_when_both_inputs_are_empty', () => {
     // Arrange & Act
     const result = formatBankName();

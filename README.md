@@ -7,7 +7,7 @@ Aplikasi desktop native modern untuk integrasi dan pengujian **Paylabs SNAP Virt
 ## 🌟 Fitur Utama
 
 1. **Paylabs SNAP VA Engine (v4.8.1)**:
-   - **Pembuatan VA Instan**: Generator Virtual Account multi-bank (BCA, BRI, BNI, Mandiri, Permata, Danamon, CIMB, BSI, dll.) sesuai standar SNAP Bank Indonesia.
+   - **Pembuatan VA Instan**: Generator Virtual Account multi-bank (BCA, BRI, BNI, Mandiri, Permata, Danamon, CIMB, BSI, Hana, dll.) sesuai standar SNAP Bank Indonesia, dengan menu terpisah untuk Dynamic VA, Multiple VA, dan Static VA (lihat [Mode Virtual Account](#-mode-virtual-account--kode-channel)).
    - **Kolom Payer Number (`virtualAccountPhone`)**: Dukungan pemetaan nomor HP pembayar pada payload SNAP, tabel riwayat, dan rincian transaksi.
    - **Enkripsi Kredensial Lokal**: Penyimpanan Private Key RSA dan Merchant Partner ID terlindungi secara lokal dengan enkripsi AES-GCM di level OS (`%APPDATA%\PaylabsVA\`).
    - **Audit SNAP Inspector**: Pencatatan jejak transaksi lengkap (*method, URL, headers, stringToSign, request body, raw response*) untuk kemudahan debugging developer.
@@ -19,6 +19,20 @@ Aplikasi desktop native modern untuk integrasi dan pengujian **Paylabs SNAP Virt
 
 3. **Safe IPC Architecture**:
    - Handlers Rust native di `src-tauri` untuk komunikasi aman, crypto signature SHA256withRSA, window management, dan persistensi riwayat dengan fallback otomatis saat diuji di web browser.
+
+---
+
+## 🏦 Mode Virtual Account & Kode Channel
+
+Setiap mode memiliki menu sendiri di sidebar. Kode channel dikirim apa adanya sebagai `additionalInfo.paymentType` pada request SNAP.
+
+| Menu | Kode channel (`paymentType`) | Default | Nominal |
+|---|---|---|---|
+| **Dynamic VA** | `BCAVA`, `BNIVA`, `BRIVA`, `BSIVA`, `CIMBVA`, `DanamonVA`, `INAVA`, `PermataVA`, `MandiriVA`, `MaybankVA`, `MuamalatVA`, `SinarmasVA`, `BNCVA`, `NobuVA`, `HanaVA` | `BNIVA` | Nominal tagihan (min. Rp 10.000) |
+| **Multiple VA** | `MultipleBCAVA`, `MultipleBNIVA`, `MultipleBRIVA`, `MultipleBSIVA`, `MultipleCIMBVA`, `MultipleDanamonVA`, `MultipleINAVA`, `MultiplePermataVA`, `MultipleMandiriVA`, `MultipleMaybankVA`, `MultipleMuamalatVA`, `MultipleSinarmasVA`, `MultipleBNCVA`, `MultipleNobuVA` | `MultipleBNIVA` | Nominal tagihan (min. Rp 10.000) |
+| **Static VA** | `StaticBNIVA`, `StaticBNCVA`, `StaticNobuVA`, `StaticINAVA`, `StaticBCAVA`, `StaticMandiriVA` | `StaticBNIVA` | Open Payment (Rp 0.00 / bebas nominal) |
+
+Daftar channel didefinisikan di dua tempat yang harus selalu sinkron: `src/services/paylabsService.ts` (frontend) dan `src-tauri/src/paylabs/client.rs` (backend).
 
 ---
 
@@ -82,6 +96,12 @@ Buka browser di `http://localhost:1420`. Anda dapat menggunakan tombol toggle di
 Menjalankan unit test Vitest untuk verifikasi komponen dan logika pemformat:
 ```bash
 npm run test
+```
+> **Catatan**: Gunakan **Node.js 22+** (sama dengan CI). Pada Node 20, worker Vitest gagal start karena dependensi `jsdom`/`undici` (`webidl.util.markAsUncloneable is not a function`).
+
+Unit test backend Rust (normalisasi `paymentType`, kripto SNAP):
+```bash
+cd src-tauri && cargo test
 ```
 
 ### 3. Membangun Bundle Frontend

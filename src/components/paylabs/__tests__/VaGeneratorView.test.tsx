@@ -1,6 +1,6 @@
 /**
  * @file VaGeneratorView.test.tsx
- * @description Unit test untuk komponen VaGeneratorView, memvalidasi form validation, mode Dynamic VA (MultipleBNIVA), dan Static VA (StaticBNIVA tanpa kolom amount).
+ * @description Unit test untuk komponen VaGeneratorView, memvalidasi form validation, mode Dynamic VA (BNIVA), Multiple VA (MultipleBNIVA), dan Static VA (StaticBNIVA tanpa kolom amount).
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -13,6 +13,7 @@ vi.mock('../../../hooks/usePaylabs', () => ({
   usePaylabs: () => ({
     status: { configured: true, environment: 'SIT' },
     channels: [
+      { id: 'BNIVA', code: '009', name: 'BNI' },
       { id: 'MultipleBNIVA', code: '009', name: 'BNI' },
       { id: 'StaticBNIVA', code: '009', name: 'BNI' },
     ],
@@ -103,6 +104,34 @@ describe('VaGeneratorView Component Validation', () => {
     expect(screen.getByText('Mandiri (008)')).toBeDefined();
   });
 
+  it('should_provide_hana_option_only_in_dynamic_mode', () => {
+    // Arrange & Act (Dynamic Mode)
+    const { unmount } = render(<VaGeneratorView mode="dynamic" onShowToast={onShowToastMock} />);
+    fireEvent.click(screen.getByRole('button', { name: /Dropdown selector/i }));
+
+    // Assert: Hana (HanaVA) hanya tersedia sebagai VA biasa
+    expect(screen.getByText('Hana (484)')).toBeDefined();
+
+    unmount();
+
+    // Arrange & Act (Multiple Mode)
+    render(<VaGeneratorView mode="multiple" onShowToast={onShowToastMock} />);
+    fireEvent.click(screen.getByRole('button', { name: /Dropdown selector/i }));
+
+    // Assert: Tidak ada MultipleHanaVA
+    expect(screen.queryByText('Hana (484)')).toBeNull();
+  });
+
+  it('should_render_amount_field_and_multiple_title_when_mode_is_multiple', () => {
+    // Arrange & Act
+    render(<VaGeneratorView mode="multiple" onShowToast={onShowToastMock} />);
+
+    // Assert: Multiple VA tetap memakai nominal tagihan seperti Dynamic VA
+    expect(screen.getByPlaceholderText('Nominal tagihan')).toBeDefined();
+    expect(screen.getByText('Parameter Multiple Virtual Account')).toBeDefined();
+    expect(screen.getByText('BNI (009)')).toBeDefined();
+  });
+
   it('should_provide_static_mandiri_va_option_in_static_mode', () => {
     // Arrange & Act
     render(<VaGeneratorView mode="static" onShowToast={onShowToastMock} />);
@@ -170,13 +199,45 @@ describe('VaGeneratorView Component Validation', () => {
     const submitButton = screen.getByRole('button', { name: /Generate Dynamic Virtual Account/i });
     fireEvent.click(submitButton);
 
-    // Assert: Memanggil API dengan amount '250000' dan channel 'MultipleBNIVA'
+    // Assert: Memanggil API dengan amount '250000' dan channel VA biasa 'BNIVA'
+    await waitFor(() => {
+      expect(submitCreateVaMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          channel: 'BNIVA',
+          name: 'Pelanggan Dinamis',
+          amount: '250000',
+        })
+      );
+    });
+  });
+
+  it('should_submit_with_multiple_channel_when_mode_is_multiple', async () => {
+    // Arrange
+    submitCreateVaMock.mockResolvedValueOnce({
+      success: true,
+      parsed: {
+        virtualAccountData: {
+          virtualAccountNo: '00912345678901234567',
+        },
+      },
+    });
+
+    render(<VaGeneratorView mode="multiple" onShowToast={onShowToastMock} />);
+
+    // Act: Isi nama lalu klik submit (nominal default 100000)
+    const nameInput = screen.getByPlaceholderText('Contoh: Budi Pratama');
+    fireEvent.change(nameInput, { target: { value: 'Pelanggan Multiple' } });
+
+    const submitButton = screen.getByRole('button', { name: /Generate Multiple Virtual Account/i });
+    fireEvent.click(submitButton);
+
+    // Assert: Memanggil API dengan channel 'MultipleBNIVA'
     await waitFor(() => {
       expect(submitCreateVaMock).toHaveBeenCalledWith(
         expect.objectContaining({
           channel: 'MultipleBNIVA',
-          name: 'Pelanggan Dinamis',
-          amount: '250000',
+          name: 'Pelanggan Multiple',
+          amount: '100000',
         })
       );
     });

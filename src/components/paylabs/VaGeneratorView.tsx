@@ -14,18 +14,27 @@ import {
 } from 'lucide-react';
 
 import { usePaylabs } from '../../hooks/usePaylabs';
-import { CreateVaFormInput } from '../../types/paylabs';
-import { DYNAMIC_CHANNELS, STATIC_CHANNELS } from '../../services/paylabsService';
+import { Channel, CreateVaFormInput, VaMode } from '../../types/paylabs';
+import { DYNAMIC_CHANNELS, MULTIPLE_CHANNELS, STATIC_CHANNELS } from '../../services/paylabsService';
 import { CustomSelect } from '../ui/CustomSelect';
 import { Tooltip } from '../ui/Tooltip';
 import { VaInspectorDrawer } from './VaInspectorDrawer';
 
 export interface VaGeneratorViewProps {
-  mode?: 'dynamic' | 'static';
+  mode?: VaMode;
   onShowToast: (title: string, message?: string, type?: 'info' | 'success' | 'warning' | 'error') => void;
   onOpenSettings?: () => void;
   onVaCreated?: () => void;
 }
+
+/**
+ * Konfigurasi per mode VA: label tampilan, daftar channel, dan channel default
+ */
+const MODE_CONFIG: Record<VaMode, { label: string; channels: readonly Channel[]; defaultChannel: string }> = {
+  dynamic: { label: 'Dynamic', channels: DYNAMIC_CHANNELS, defaultChannel: 'BNIVA' },
+  multiple: { label: 'Multiple', channels: MULTIPLE_CHANNELS, defaultChannel: 'MultipleBNIVA' },
+  static: { label: 'Static', channels: STATIC_CHANNELS, defaultChannel: 'StaticBNIVA' },
+};
 
 const PRESET_AMOUNTS = [
   { label: '50rb', value: '50000' },
@@ -93,7 +102,7 @@ interface FormErrors {
  * Komponen Form Input Pembuatan VA macOS
  */
 interface VaFormSectionProps {
-  mode: 'dynamic' | 'static';
+  mode: VaMode;
   channel: string;
   setChannel: (val: string) => void;
   channelOptions: Array<{ value: string; label: string }>;
@@ -137,7 +146,7 @@ const VaFormSection: React.FC<VaFormSectionProps> = ({
     <form className="paylabs-mac-card paylabs-form-card" onSubmit={onSubmit} noValidate>
       <div className="paylabs-card-header">
         <h3 className="paylabs-card-title">
-          {mode === 'static' ? 'Parameter Static Virtual Account' : 'Parameter Dynamic Virtual Account'}
+          Parameter {MODE_CONFIG[mode].label} Virtual Account
         </h3>
       </div>
 
@@ -204,7 +213,7 @@ const VaFormSection: React.FC<VaFormSectionProps> = ({
           />
         </div>
 
-        {/* Nominal & Preset Pill (Hanya tampil pada Dynamic VA, ditiadakan pada Static VA) */}
+        {/* Nominal & Preset Pill (Hanya tampil pada Dynamic & Multiple VA, ditiadakan pada Static VA) */}
         {mode === 'static' ? (
           <div id="va-static-amount-info" className="paylabs-field">
             <label className="paylabs-label">Nominal Pembayaran</label>
@@ -320,7 +329,7 @@ const VaFormSection: React.FC<VaFormSectionProps> = ({
             <span>Menandatangani & Mengirim SNAP...</span>
           ) : (
             <>
-              <span>{mode === 'static' ? 'Generate Static Virtual Account' : 'Generate Dynamic Virtual Account'}</span>
+              <span>Generate {MODE_CONFIG[mode].label} Virtual Account</span>
               <ArrowRight size={15} />
             </>
           )}
@@ -334,7 +343,7 @@ const VaFormSection: React.FC<VaFormSectionProps> = ({
  * Komponen Kartu Hasil VA macOS
  */
 interface ResultSectionProps {
-  mode: 'dynamic' | 'static';
+  mode: VaMode;
   createdVa: any;
   copiedVa: boolean;
   onCopyVa: (vaNo: string) => void;
@@ -443,9 +452,10 @@ export const VaGeneratorView: React.FC<VaGeneratorViewProps> = ({
   onVaCreated,
 }) => {
   const isStatic = mode === 'static';
+  const { channels: availableList, defaultChannel } = MODE_CONFIG[mode];
   const { status, isSubmitting, lastExchange, submitCreateVa } = usePaylabs();
 
-  const [channel, setChannel] = useState(isStatic ? 'StaticBNIVA' : 'MultipleBNIVA');
+  const [channel, setChannel] = useState(defaultChannel);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [amount, setAmount] = useState(isStatic ? '0' : '100000');
@@ -457,10 +467,10 @@ export const VaGeneratorView: React.FC<VaGeneratorViewProps> = ({
 
   // Sinkronisasi bila prop mode berubah
   React.useEffect(() => {
-    setChannel(isStatic ? 'StaticBNIVA' : 'MultipleBNIVA');
+    setChannel(defaultChannel);
     setAmount(isStatic ? '0' : '100000');
     setErrors({});
-  }, [isStatic]);
+  }, [defaultChannel, isStatic]);
 
   const handleClearError = (field: keyof FormErrors) => {
     setErrors((prev) => {
@@ -526,8 +536,7 @@ export const VaGeneratorView: React.FC<VaGeneratorViewProps> = ({
     setTimeout(() => setCopiedVa(false), 2000);
   };
 
-  // Pilihan channel bank resmi yang didukung Paylabs SNAP (14 Bank)
-  const availableList = isStatic ? STATIC_CHANNELS : DYNAMIC_CHANNELS;
+  // Pilihan channel bank resmi yang didukung Paylabs SNAP sesuai mode aktif
   const channelOptions = availableList.map((ch) => ({
     value: ch.id,
     label: `${ch.name} (${ch.code})`,

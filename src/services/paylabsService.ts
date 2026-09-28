@@ -15,6 +15,24 @@ import {
 import { isTauriEnvironment } from './windowService';
 
 export const DYNAMIC_CHANNELS: readonly Channel[] = [
+  { id: 'BCAVA', code: '014', name: 'BCA' },
+  { id: 'BNIVA', code: '009', name: 'BNI' },
+  { id: 'BRIVA', code: '002', name: 'BRI' },
+  { id: 'BSIVA', code: '451', name: 'BSI' },
+  { id: 'CIMBVA', code: '022', name: 'CIMB Niaga' },
+  { id: 'DanamonVA', code: '011', name: 'Danamon' },
+  { id: 'INAVA', code: '513', name: 'Bank INA' },
+  { id: 'PermataVA', code: '013', name: 'Permata' },
+  { id: 'MandiriVA', code: '008', name: 'Mandiri' },
+  { id: 'MaybankVA', code: '016', name: 'Maybank' },
+  { id: 'MuamalatVA', code: '147', name: 'Muamalat' },
+  { id: 'SinarmasVA', code: '153', name: 'Sinarmas' },
+  { id: 'BNCVA', code: '490', name: 'BNC' },
+  { id: 'NobuVA', code: '503', name: 'Nobu' },
+  { id: 'HanaVA', code: '484', name: 'Hana' },
+];
+
+export const MULTIPLE_CHANNELS: readonly Channel[] = [
   { id: 'MultipleBCAVA', code: '014', name: 'BCA' },
   { id: 'MultipleBNIVA', code: '009', name: 'BNI' },
   { id: 'MultipleBRIVA', code: '002', name: 'BRI' },
@@ -42,6 +60,7 @@ export const STATIC_CHANNELS: readonly Channel[] = [
 
 const MOCK_CHANNELS: Channel[] = [
   ...DYNAMIC_CHANNELS,
+  ...MULTIPLE_CHANNELS,
   ...STATIC_CHANNELS,
 ];
 
@@ -100,7 +119,7 @@ export async function getPaylabsChannels(): Promise<Channel[]> {
 }
 
 /**
- * Membuat Virtual Account multiple-use melalui SNAP API.
+ * Membuat Virtual Account (Dynamic, Multiple, atau Static) melalui SNAP API.
  */
 export async function createVirtualAccount(form: CreateVaFormInput): Promise<Exchange> {
   if (!isTauriEnvironment()) {

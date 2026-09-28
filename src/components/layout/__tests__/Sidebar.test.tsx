@@ -31,6 +31,7 @@ describe('Sidebar Component', () => {
 
     // Assert
     expect(screen.getByText('Dynamic VA')).toBeDefined();
+    expect(screen.getByText('Multiple VA')).toBeDefined();
     expect(screen.getByText('Static VA')).toBeDefined();
     expect(screen.getByText('Riwayat VA')).toBeDefined();
     expect(screen.getByText('Navigation')).toBeDefined();
@@ -165,6 +166,25 @@ describe('Sidebar Component', () => {
 
     // Assert
     expect(handleSelectTab).toHaveBeenCalledWith('static-va');
+  });
+
+  it('should_call_onSelectTab_with_multiple_va_when_multiple_va_nav_item_is_clicked', () => {
+    // Arrange
+    const handleSelectTab = vi.fn();
+    render(
+      <Sidebar
+        activeTab="va-generator"
+        onSelectTab={handleSelectTab}
+        isCollapsed={false}
+      />
+    );
+
+    // Act
+    const multipleVaButton = screen.getByText('Multiple VA');
+    fireEvent.click(multipleVaButton);
+
+    // Assert
+    expect(handleSelectTab).toHaveBeenCalledWith('multiple-va');
   });
 });
 

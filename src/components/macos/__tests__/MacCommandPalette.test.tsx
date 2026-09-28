@@ -90,6 +90,29 @@ describe('MacCommandPalette Component (Apple HIG)', () => {
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 
+  it('should_select_multiple_va_tab_when_multiple_va_command_is_clicked', () => {
+    // Arrange
+    const handleSelectTab = vi.fn();
+    const handleClose = vi.fn();
+
+    render(
+      <MacCommandPalette
+        isOpen={true}
+        onClose={handleClose}
+        onSelectTab={handleSelectTab}
+        onToggleTheme={vi.fn()}
+      />
+    );
+
+    // Act
+    const multipleVaBtn = screen.getByText(/Multiple VA Generator/i);
+    fireEvent.click(multipleVaBtn);
+
+    // Assert
+    expect(handleSelectTab).toHaveBeenCalledWith('multiple-va');
+    expect(handleClose).toHaveBeenCalledTimes(1);
+  });
+
   it('should_close_when_Escape_key_is_pressed', () => {
     // Arrange
     const handleClose = vi.fn();

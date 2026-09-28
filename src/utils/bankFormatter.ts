@@ -29,6 +29,7 @@ export function formatBankName(channelName?: string, channelCode?: string): stri
   if (upper.includes('INA')) return 'Bank INA';
   if (upper.includes('BNC') || upper.includes('NEO')) return 'BNC';
   if (upper.includes('NOBU')) return 'Nobu';
+  if (upper.includes('HANA')) return 'Hana';
 
   // Hapus kata 'Bank ' atau suffix ' Bank' jika ada
   return raw.replace(/^Bank\s+/i, '').replace(/\s+Bank$/i, '');

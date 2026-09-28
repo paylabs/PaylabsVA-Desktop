@@ -12,10 +12,11 @@ import {
   Compass,
   BookOpen,
   Layers,
+  Repeat,
 } from 'lucide-react';
 import { Tooltip } from '../ui/Tooltip';
 
-export type ActiveTab = 'va-generator' | 'static-va' | 'va-history' | 'user-manual';
+export type ActiveTab = 'va-generator' | 'multiple-va' | 'static-va' | 'va-history' | 'user-manual';
 
 export interface SidebarProps {
   activeTab: ActiveTab;
@@ -34,6 +35,7 @@ interface NavItem {
 
 const NAV_ITEMS: readonly NavItem[] = [
   { id: 'va-generator', label: 'Dynamic VA', icon: <CreditCard size={18} /> },
+  { id: 'multiple-va', label: 'Multiple VA', icon: <Repeat size={18} /> },
   { id: 'static-va', label: 'Static VA', icon: <Layers size={18} /> },
   { id: 'va-history', label: 'Riwayat VA', icon: <History size={18} /> },
   { id: 'user-manual', label: 'Panduan', icon: <BookOpen size={18} /> },

@@ -3,7 +3,7 @@
  * @description Definisi tipe data TypeScript untuk integrasi Paylabs SNAP VA API.
  */
 
-export type VaMode = 'dynamic' | 'static';
+export type VaMode = 'dynamic' | 'multiple' | 'static';
 
 export interface Channel {
   id: string;

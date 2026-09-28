@@ -21,6 +21,22 @@ import { ToastContainer } from '../ui/Toast';
 import { useAppUpdater } from '../../hooks/useAppUpdater';
 import { UpdateNotificationBanner } from '../updater/UpdateNotificationBanner';
 import { ReleaseNotesModal } from '../updater/ReleaseNotesModal';
+import { VaMode } from '../../types/paylabs';
+
+const PAGE_TITLES: Record<ActiveTab, string> = {
+  'va-generator': 'Generate Dynamic Virtual Account',
+  'multiple-va': 'Generate Multiple Virtual Account',
+  'static-va': 'Generate Static Virtual Account',
+  'va-history': 'Riwayat Virtual Account',
+  'user-manual': 'Panduan Pengguna',
+};
+
+/** Tab generator VA beserta mode form yang dirender */
+const GENERATOR_MODES: Partial<Record<ActiveTab, VaMode>> = {
+  'va-generator': 'dynamic',
+  'multiple-va': 'multiple',
+  'static-va': 'static',
+};
 
 /**
  * Shell utama aplikasi desktop Tauri (macOS Native Profile)
@@ -66,14 +82,8 @@ export const AppShell: React.FC = () => {
     .filter(Boolean)
     .join(' ');
 
-  const pageTitle =
-    activeTab === 'static-va'
-      ? 'Generate Static Virtual Account'
-      : activeTab === 'va-generator'
-        ? 'Generate Dynamic Virtual Account'
-        : activeTab === 'va-history'
-          ? 'Riwayat Virtual Account'
-          : 'Panduan Pengguna';
+  const pageTitle = PAGE_TITLES[activeTab];
+  const generatorMode = GENERATOR_MODES[activeTab];
 
   const handleTourEnd = useCallback(() => {
     setIsTourRunning(false);
@@ -114,19 +124,10 @@ export const AppShell: React.FC = () => {
           }}
         />
 
-        {activeTab === 'static-va' ? (
+        {generatorMode ? (
           <main className="main-content-scroll va-generator-main">
             <VaGeneratorView
-              mode="static"
-              onShowToast={showToast}
-              onOpenSettings={() => setIsSettingsOpen(true)}
-              onVaCreated={refreshHistory}
-            />
-          </main>
-        ) : activeTab === 'va-generator' ? (
-          <main className="main-content-scroll va-generator-main">
-            <VaGeneratorView
-              mode="dynamic"
+              mode={generatorMode}
               onShowToast={showToast}
               onOpenSettings={() => setIsSettingsOpen(true)}
               onVaCreated={refreshHistory}

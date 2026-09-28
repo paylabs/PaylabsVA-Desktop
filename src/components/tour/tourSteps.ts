@@ -77,7 +77,7 @@ export const TOUR_STEPS: CustomDriveStep[] = [
     popover: {
       title: 'Navigasi Menu Utama',
       description:
-        'Sidebar untuk berpindah menu kerja: Dynamic VA (tagihan spesifik), Static VA (open payment), Riwayat VA untuk audit, dan Panduan operasional.',
+        'Sidebar untuk berpindah menu kerja: Dynamic VA (tagihan spesifik), Multiple VA (channel Multiple*VA), Static VA (open payment), Riwayat VA untuk audit, dan Panduan operasional.',
       side: 'right',
       align: 'start',
     },
@@ -110,7 +110,7 @@ export const TOUR_STEPS: CustomDriveStep[] = [
     popover: {
       title: 'Nominal Tagihan (Dynamic VA)',
       description:
-        'Tentukan nilai pembayaran tertutup dalam Rupiah untuk Dynamic VA. Pada Static VA, nominal otomatis bernilai 0.00 (Open Payment bebas nominal).',
+        'Tentukan nilai pembayaran tertutup dalam Rupiah untuk Dynamic VA dan Multiple VA. Pada Static VA, nominal otomatis bernilai 0.00 (Open Payment bebas nominal).',
       side: 'bottom',
       align: 'start',
     },
