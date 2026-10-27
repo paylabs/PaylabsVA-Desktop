@@ -11,6 +11,9 @@ description: >-
 
 Skill ini memandu pengembangan antarmuka desktop modern menggunakan **Tauri v2 (Rust)** dan **React TypeScript + Vite** dengan pendekatan **Consistent & Platform-Harmonized Desktop UX** (Windows & macOS).
 
+> **💡 Menggunakan Base App ini untuk Aplikasi macOS Baru?**  
+> Rujuk skill [`.agents/skills/macos-design/SKILL.md`](file:///c:/project/PaylabsVA-Desktop-main/.agents/skills/macos-design/SKILL.md) untuk panduan lengkap desain Apple HIG, Spotlight Command Palette ⌘K, top-right Toast banner, dan petunjuk scaffolding rebrand aplikasi baru.
+
 ---
 
 ## 1. Alur Menambah Perintah IPC Rust Baru

@@ -44,9 +44,14 @@ Semua pengembangan fitur visual wajib mengikuti aturan di [`.agents/rules/tauri-
    - Plugin MCP bridge aktif secara eksklusif pada mode debug (`#[cfg(debug_assertions)]`) dan terikat ke `127.0.0.1` (*localhost only*).
    - Menyediakan automasi UI, monitoring IPC real-time, window state, dan console logging untuk AI assistant tanpa mencemari build rilis produksi.
    - Eksekusi cepat via `npm run tauri:mcp` (`npx -y @hypothesi/tauri-mcp-server`).
+9. **Desktop Style MCP Server (`@paylabs/desktop-style-mcp`)**:
+   - Berlokasi global di `c:/project/desktop-style-mcp/` dan terkonfigurasi di `~/.gemini/config/mcp_config.json`.
+   - Menyediakan 5 tools MCP (`audit_desktop_project`, `scaffold_macos_component`, `get_design_tokens`, `scaffold_base_app_template`, `get_apple_hig_rule`) untuk mengawal konsistensi seluruh proyek desktop app yang dibangun ke depannya.
 
 ---
 
 ## 📚 Skill Terkait
 
-Gunakan skill [`.agents/skills/tauri-desktop-style/SKILL.md`](file:///c:/project/PaylabsVA-Desktop-main/.agents/skills/tauri-desktop-style/SKILL.md) untuk panduan teknis langkah demi langkah penambahan IPC command, window management, integrasi MCP server, dan validasi QA.
+- **macOS Native App Styling & Base App Template**: [`.agents/skills/macos-design/SKILL.md`](file:///c:/project/PaylabsVA-Desktop-main/.agents/skills/macos-design/SKILL.md) — Panduan komprehensif macOS design system, window chrome, Traffic Lights, Spotlight Command Palette ⌘K, Toast banner, dan cara menggunakan repositori ini sebagai base app untuk aplikasi desktop baru.
+- **Tauri Desktop & Cross-Platform Style**: [`.agents/skills/tauri-desktop-style/SKILL.md`](file:///c:/project/PaylabsVA-Desktop-main/.agents/skills/tauri-desktop-style/SKILL.md) — Panduan teknis penambahan IPC command, window management, integrasi MCP server, dan konsistensi Windows/macOS.
+- **Tauri macOS Build & Distribution**: [`.agents/skills/tauri-macos-build/SKILL.md`](file:///c:/project/PaylabsVA-Desktop-main/.agents/skills/tauri-macos-build/SKILL.md) — Panduan packaging .app & .dmg, universal binary, Gatekeeper, dan CI/CD macOS.
